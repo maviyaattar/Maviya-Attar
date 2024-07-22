@@ -474,7 +474,7 @@
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
                     if (response.success) {
-                        window.location.href = '/thanks.html';
+                        window.location.href = 'thanks.html';
                     } else {
                         alert('There was an error submitting your message. Please try again.');
                     }
