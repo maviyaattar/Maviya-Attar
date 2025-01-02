@@ -19,6 +19,7 @@
 </head>
 
 <body>
+    <div class="scroll-animation">
     <!--=============== HEADER ===============-->
     <header class="header" id="header">
         <nav class="nav container">
@@ -466,10 +467,20 @@
             };
             xhr.send(formData);
         });
+
+window.addEventListener('scroll', function() {
+  let elements = document.querySelectorAll('.scroll-animation');
+  elements.forEach(function(element) {
+    if (element.getBoundingClientRect().top < window.innerHeight) {
+      element.classList.add('visible');
+    }
+  });
+});
+    
 </script>
 
 
-
+                </div>
 </body>
 
 </html>
