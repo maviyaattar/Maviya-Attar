@@ -1217,3 +1217,63 @@ body.light-theme {
     border-radius: 0.5rem;
   }
 }
+
+
+/* General Animation Keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-100px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+/* Animation Classes */
+.fade-in {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.slide-in {
+  animation: slideIn 1s ease-in-out;
+}
+
+/* Section-Specific Styles */
+header {
+  animation: fadeIn 1.2s ease-in-out;
+}
+
+section {
+  animation: fadeIn 1s ease-in-out;
+}
+
+.project-card {
+  animation: slideIn 1s ease-in-out;
+  animation-delay: 0.3s;
+}
+
+.contact-form {
+  animation: fadeIn 1.5s ease-in-out;
+}
