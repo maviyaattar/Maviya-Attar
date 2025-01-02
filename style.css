@@ -1285,22 +1285,6 @@ section {
 
 
 
-/* General hover shadow effect with matching color */
-* {
-  transition: all 0.3s ease;
-}
-
-* :hover {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  background-color: #4E5D6A; /* Slight matching color */
-}
-
-/* Specific hover effect for elements */
-.project-card:hover, .contact-form:hover, header:hover {
-  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.2);
-  background-color: #4E5D6A;
-}
-
 /* Scroll animation setup */
 .scroll-animation {
   opacity: 0;
