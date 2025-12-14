@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects</title>
+
+<style>
+:root{
+  --primary:hsl(250,66%,75%);
+  --bg:#0f1220;
+  --card:#1a1d33;
+  --text:#fff;
+}
+.light{
+  --bg:#fff;
+  --card:#f2f3ff;
+  --text:#000;
+}
+
+*{box-sizing:border-box;font-family:Poppins,system-ui}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--text);
+  padding:16px;
+}
+
+header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+}
+
+button{
+  border:none;
+  padding:8px 14px;
+  border-radius:20px;
+  background:var(--card);
+  color:var(--text);
+  cursor:pointer;
+}
+
+.filters{
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  margin-bottom:10px;
+}
+.filters button.active{
+  background:var(--primary);
+  color:#000;
+}
+
+.search{margin-bottom:10px}
+.search input{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  background:var(--card);
+  color:var(--text);
+}
+
+.grid{
+  display:grid;
+  gap:14px;
+}
+@media(min-width:900px){
+  .grid{grid-template-columns:repeat(3,1fr)}
+}
+
+.card{
+  background:var(--card);
+  border-radius:14px;
+  padding:14px;
+}
+.card img{
+  width:100%;
+  border-radius:10px;
+}
+
+.actions a{
+  display:inline-block;
+  margin-right:8px;
+  margin-top:8px;
+  padding:6px 14px;
+  background:var(--primary);
+  color:#000;
+  text-decoration:none;
+  border-radius:20px;
+  font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h3>Projects</h3>
+  <div>
+    <button onclick="toggleMode()">🌗</button>
+    <a href="index.html" style="color:var(--primary)">Home</a>
+  </div>
+</header>
+
+<div class="filters">
+  <button class="active" data="all">All</button>
+  <button data="static">Static</button>
+  <button data="fullstack">Fullstack</button>
+  <button data="ai">AI</button>
+  <button data="automation">Automation</button>
+  <button data="hacking">Hacking</button>
+</div>
+
+<div class="search">
+  <input id="search" placeholder="Search projects...">
+</div>
+
+<div class="grid" id="list"></div>
+<script>
+const API = "https://f07959ba-10d3-42f4-b9b5-7bc57a2300e8-00-1ownfjeaogqpy.sisko.replit.dev/projects";
+
+const list = document.getElementById("list");
+const search = document.getElementById("search");
+const btns = document.querySelectorAll(".filters button");
+
+let allProjects = [];
+let currentCategory = "all";
+
+/* MODE TOGGLE */
+function toggleMode(){
+  document.body.classList.toggle("light");
+  localStorage.setItem(
+    "mode",
+    document.body.classList.contains("light") ? "light" : "dark"
+  );
+}
+if(localStorage.getItem("mode") === "light"){
+  document.body.classList.add("light");
+}
+
+/* LOAD PROJECTS */
+fetch(API)
+  .then(res => res.json())
+  .then(data => {
+    allProjects = data;
+    renderProjects();
+  })
+  .catch(err => {
+    list.innerHTML = "<p>Failed to load projects</p>";
+    console.error(err);
+  });
+
+/* CATEGORY FILTER */
+btns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    btns.forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+
+    currentCategory = btn.getAttribute("data"); // ✅ FIX
+    renderProjects();
+  });
+});
+
+/* SEARCH */
+search.addEventListener("input", renderProjects);
+
+/* RENDER */
+function renderProjects(){
+  const query = search.value.toLowerCase().trim();
+  list.innerHTML = "";
+
+  const filtered = allProjects
+    .filter(p =>
+      currentCategory === "all" || p.category === currentCategory
+    )
+    .filter(p =>
+      p.name.toLowerCase().includes(query)
+    );
+
+  if(filtered.length === 0){
+    list.innerHTML = "<p>No projects found.</p>";
+    return;
+  }
+
+  filtered.forEach(p => {
+    list.innerHTML += `
+      <div class="card">
+        <img src="${p.image}" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <small>${p.stack}</small>
+        <p>${p.description}</p>
+        <div class="actions">
+          ${p.liveLink ? `<a href="${p.liveLink}" target="_blank">Live</a>` : ""}
+          ${p.sourceLink ? `<a href="${p.sourceLink}" target="_blank">Code</a>` : ""}
+        </div>
+      </div>
+    `;
+  });
+}
+</script>
+</body>
+</html>
