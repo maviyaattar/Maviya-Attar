@@ -841,7 +841,7 @@
      
      <script>
 (function(){
-  const API = "https://f07959ba-10d3-42f4-b9b5-7bc57a2300e8-00-1ownfjeaogqpy.sisko.replit.dev/contact";
+  const API = "https://portfolio-backend-api-8me4.onrender.com/contact";
 
   const form = document.getElementById("contactForm");
   const btn  = document.getElementById("contactBtn");
@@ -874,18 +874,23 @@
 
     try{
       const res = await fetch(API,{
-        method:"POST",
-        headers:{ "Content-Type":"application/json" },
+        method: "POST",
+        headers: { "Content-Type":"application/json" },
         body: JSON.stringify(payload)
       });
 
-      if(!res.ok) throw new Error("Failed");
+      const data = await res.json().catch(() => ({}));
+
+      if(!res.ok){
+        throw new Error(data.error || "Failed to send message");
+      }
 
       showAlert("Message sent successfully ✅");
       form.reset();
 
     }catch(err){
-      showAlert("Failed to send message ❌", true);
+      console.error(err);
+      showAlert("❌ " + err.message, true);
     }
 
     btn.innerText = "Send Message";
