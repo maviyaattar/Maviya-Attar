@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,7 +144,7 @@ if(localStorage.getItem("mode") === "light"){
 /* LOAD PROJECTS */
 fetch(API)
   .then(res => {
-    if (!res.ok) throw new Error("Failed to fetch");
+    if (!res.ok) throw new Error("Failed to fetch projects");
     return res.json();
   })
   .then(data => {
@@ -162,7 +161,6 @@ btns.forEach(btn => {
   btn.addEventListener("click", () => {
     btns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-
     currentCategory = btn.getAttribute("data");
     renderProjects();
   });
@@ -171,13 +169,19 @@ btns.forEach(btn => {
 /* SEARCH */
 search.addEventListener("input", renderProjects);
 
-/* RENDER */
+/* RENDER PROJECTS (IMAGE OPTIONAL + MULTI CATEGORY SAFE) */
 function renderProjects(){
   const query = search.value.toLowerCase().trim();
   list.innerHTML = "";
 
   const filtered = allProjects
-    .filter(p => currentCategory === "all" || p.category === currentCategory)
+    .filter(p => {
+      if (currentCategory === "all") return true;
+      if (Array.isArray(p.categories)) {
+        return p.categories.includes(currentCategory);
+      }
+      return p.category === currentCategory;
+    })
     .filter(p => p.name.toLowerCase().includes(query));
 
   if(filtered.length === 0){
@@ -188,7 +192,7 @@ function renderProjects(){
   filtered.forEach(p => {
     list.innerHTML += `
       <div class="card">
-        <img src="${p.image}" alt="${p.name}">
+        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : ""}
         <h4>${p.name}</h4>
         <small>${p.stack}</small>
         <p>${p.description}</p>
