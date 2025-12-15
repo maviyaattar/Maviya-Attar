@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -120,7 +121,7 @@ button{
 
 <div class="grid" id="list"></div>
 <script>
-const API = "https://f07959ba-10d3-42f4-b9b5-7bc57a2300e8-00-1ownfjeaogqpy.sisko.replit.dev/projects";
+const API = "https://portfolio-backend-api-8me4.onrender.com/projects";
 
 const list = document.getElementById("list");
 const search = document.getElementById("search");
@@ -143,14 +144,17 @@ if(localStorage.getItem("mode") === "light"){
 
 /* LOAD PROJECTS */
 fetch(API)
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error("Failed to fetch");
+    return res.json();
+  })
   .then(data => {
     allProjects = data;
     renderProjects();
   })
   .catch(err => {
-    list.innerHTML = "<p>Failed to load projects</p>";
     console.error(err);
+    list.innerHTML = "<p>Failed to load projects.</p>";
   });
 
 /* CATEGORY FILTER */
@@ -159,7 +163,7 @@ btns.forEach(btn => {
     btns.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
-    currentCategory = btn.getAttribute("data"); // ✅ FIX
+    currentCategory = btn.getAttribute("data");
     renderProjects();
   });
 });
@@ -173,12 +177,8 @@ function renderProjects(){
   list.innerHTML = "";
 
   const filtered = allProjects
-    .filter(p =>
-      currentCategory === "all" || p.category === currentCategory
-    )
-    .filter(p =>
-      p.name.toLowerCase().includes(query)
-    );
+    .filter(p => currentCategory === "all" || p.category === currentCategory)
+    .filter(p => p.name.toLowerCase().includes(query));
 
   if(filtered.length === 0){
     list.innerHTML = "<p>No projects found.</p>";
