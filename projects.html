@@ -71,10 +71,16 @@ header{
 header h1{
   font-size:2rem;
   font-weight:700;
-  background:linear-gradient(135deg,var(--primary),var(--primary-light));
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  background-clip:text;
+  color:var(--primary);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text){
+  header h1{
+    background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    background-clip:text;
+  }
 }
 
 .header-actions{
@@ -536,8 +542,9 @@ if(localStorage.getItem("mode") === "light"){
 /* SKELETON LOADER */
 function renderSkeletons(count = 8){
   list.innerHTML = "";
+  let skeletonsHTML = "";
   for(let i = 0; i < count; i++){
-    const skeleton = `
+    skeletonsHTML += `
       <div class="skeleton-card">
         <div class="skeleton skeleton-image"></div>
         <div class="skeleton skeleton-title"></div>
@@ -545,8 +552,8 @@ function renderSkeletons(count = 8){
         <div class="skeleton skeleton-text"></div>
       </div>
     `;
-    list.innerHTML += skeleton;
   }
+  list.innerHTML = skeletonsHTML;
 }
 
 /* LOAD PROJECTS */
@@ -623,25 +630,81 @@ function renderProjects(){
     card.className = 'card';
     card.style.animationDelay = `${index * 0.05}s`;
     
-    card.innerHTML = `
-      ${p.image ? `
-        <div class="card-image-wrapper">
-          <img src="${p.image}" alt="${p.name}" loading="lazy">
-        </div>
-      ` : ''}
-      <div class="card-content">
-        <h4>${p.name}</h4>
-        ${p.stack ? `<small>${p.stack}</small>` : ''}
-        <p>${p.description}</p>
-        <div class="actions">
-          ${p.liveLink ? `<a href="${p.liveLink}" target="_blank" rel="noopener noreferrer">🚀 Live Demo</a>` : ""}
-          ${p.sourceLink ? `<a href="${p.sourceLink}" target="_blank" rel="noopener noreferrer">💻 Source Code</a>` : ""}
-        </div>
-      </div>
-    `;
+    // Create card content safely
+    const cardContent = document.createElement('div');
+    cardContent.className = 'card-content';
     
+    // Add image if exists
+    if(p.image && isValidUrl(p.image)){
+      const imgWrapper = document.createElement('div');
+      imgWrapper.className = 'card-image-wrapper';
+      const img = document.createElement('img');
+      img.src = escapeHtml(p.image);
+      img.alt = escapeHtml(p.name);
+      img.loading = 'lazy';
+      imgWrapper.appendChild(img);
+      card.appendChild(imgWrapper);
+    }
+    
+    // Add title
+    const title = document.createElement('h4');
+    title.textContent = p.name;
+    cardContent.appendChild(title);
+    
+    // Add stack badge
+    if(p.stack){
+      const stack = document.createElement('small');
+      stack.textContent = p.stack;
+      cardContent.appendChild(stack);
+    }
+    
+    // Add description
+    const description = document.createElement('p');
+    description.textContent = p.description;
+    cardContent.appendChild(description);
+    
+    // Add action buttons
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    
+    if(p.liveLink && isValidUrl(p.liveLink)){
+      const liveBtn = document.createElement('a');
+      liveBtn.href = escapeHtml(p.liveLink);
+      liveBtn.target = '_blank';
+      liveBtn.rel = 'noopener noreferrer';
+      liveBtn.textContent = '🚀 Live Demo';
+      actions.appendChild(liveBtn);
+    }
+    
+    if(p.sourceLink && isValidUrl(p.sourceLink)){
+      const sourceBtn = document.createElement('a');
+      sourceBtn.href = escapeHtml(p.sourceLink);
+      sourceBtn.target = '_blank';
+      sourceBtn.rel = 'noopener noreferrer';
+      sourceBtn.textContent = '💻 Source Code';
+      actions.appendChild(sourceBtn);
+    }
+    
+    cardContent.appendChild(actions);
+    card.appendChild(cardContent);
     list.appendChild(card);
   });
+}
+
+/* UTILITY FUNCTIONS FOR SECURITY */
+function escapeHtml(text){
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}
+
+function isValidUrl(url){
+  try {
+    const urlObj = new URL(url);
+    return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
+  } catch {
+    return false;
+  }
 }
 </script>
 </body>
