@@ -608,7 +608,7 @@ body {
   <!--=============== HEADER ===============-->
   <header class="header">
     <div class="container header__content">
-      <a href="index.html" class="header__logo">معاویہ『AM』</a>
+      <a href="index.html" class="header__logo" lang="ar" aria-label="Maviya Attar Logo">معاویہ『AM』</a>
       <div class="header__actions">
         <button class="theme-toggle" onclick="toggleMode()" aria-label="Toggle theme">
           <i class="fa-solid fa-moon" id="themeIcon"></i>
@@ -885,8 +885,8 @@ body {
     function renderProjects() {
       const query = searchInput.value.toLowerCase().trim();
       
-      // Clear existing content efficiently
-      projectsGrid.replaceChildren();
+      // Clear existing content (compatible approach)
+      projectsGrid.innerHTML = '';
       
       const filtered = allProjects
         .filter(p => {

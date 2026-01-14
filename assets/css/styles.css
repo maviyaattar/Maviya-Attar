@@ -1377,12 +1377,20 @@ body.light-theme {
 /*=============== MOBILE RESPONSIVE TOUCH IMPROVEMENTS ===============*/
 @media (hover: none) and (pointer: coarse) {
   .button:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
+    background-color: var(--first-color-alt);
   }
   
   .nav__link:active,
   .home__social-link:active,
   .contact__button:active {
-    transform: scale(0.95);
+    transform: scale(0.92);
+    background-color: var(--first-color);
+    color: var(--body-color);
+  }
+  
+  .work__card:active,
+  .services__card:active {
+    transform: scale(0.97);
   }
 }

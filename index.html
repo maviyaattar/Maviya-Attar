@@ -79,14 +79,14 @@
     <!--=============== LOADING ANIMATION ===============-->
     <div class="loading-screen" id="loadingScreen">
         <div class="loading-content">
-            <h1 class="loading-logo">معاویہ『AM』</h1>
+            <h1 class="loading-logo" lang="ar" aria-label="Maviya Attar Loading">معاویہ『AM』</h1>
         </div>
     </div>
 
     <!--=============== HEADER ===============-->
     <header class="header" id="header">
         <nav class="nav container">
-            <a href="#" class="nav__logo">معاویہ『AM』</a>
+            <a href="#" class="nav__logo" lang="ar" aria-label="Maviya Attar Logo">معاویہ『AM』</a>
 
             <div class="nav__menu">
                 <ul class="nav__list">
@@ -933,7 +933,12 @@ window.addEventListener('load', function() {
       showAlert("❌ " + err.message, true);
     }
 
-    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+    // Safely restore button content
+    btn.textContent = '';
+    const icon = document.createElement('i');
+    icon.className = 'fa-solid fa-paper-plane';
+    btn.appendChild(icon);
+    btn.appendChild(document.createTextNode(' Send Message'));
     btn.disabled = false;
   });
 })();
