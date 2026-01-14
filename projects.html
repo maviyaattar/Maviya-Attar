@@ -885,10 +885,8 @@ body {
     function renderProjects() {
       const query = searchInput.value.toLowerCase().trim();
       
-      // Use replaceChildren for better performance
-      while (projectsGrid.firstChild) {
-        projectsGrid.removeChild(projectsGrid.firstChild);
-      }
+      // Clear existing content efficiently
+      projectsGrid.replaceChildren();
       
       const filtered = allProjects
         .filter(p => {
@@ -958,12 +956,12 @@ body {
         projectsGrid.appendChild(card);
       });
       
-      // Add scroll reveal animation
-      observeCards();
+      // Reinitialize card animations
+      reinitializeCardObserver();
     }
     
-    // Initialize or reuse intersection observer for card animations
-    function observeCards() {
+    // Reinitialize intersection observer for card animations
+    function reinitializeCardObserver() {
       // Disconnect existing observer if it exists
       if (cardObserver) {
         cardObserver.disconnect();

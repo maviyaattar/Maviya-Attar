@@ -1374,18 +1374,6 @@ body.light-theme {
   box-shadow: 0 8px 24px hsla(var(--second-hue), 48%, 8%, 0.2);
 }
 
-/*=============== SCROLL REVEAL ENHANCEMENTS ===============*/
-.reveal {
-  opacity: 0;
-  transform: translateY(30px);
-  transition: all 0.8s ease;
-}
-
-.reveal.active {
-  opacity: 1;
-  transform: translateY(0);
-}
-
 /*=============== MOBILE RESPONSIVE TOUCH IMPROVEMENTS ===============*/
 @media (hover: none) and (pointer: coarse) {
   .button:active {
