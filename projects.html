@@ -764,6 +764,9 @@ body {
     const filterModal = document.getElementById("filterModal");
     const modalOverlay = document.getElementById("modalOverlay");
     
+    // Intersection observer for card animations (created once)
+    let cardObserver = null;
+    
     // Tech stack icons mapping
     const techIcons = {
       'html': 'fa-brands fa-html5',
@@ -881,7 +884,11 @@ body {
     // Render projects
     function renderProjects() {
       const query = searchInput.value.toLowerCase().trim();
-      projectsGrid.innerHTML = "";
+      
+      // Use replaceChildren for better performance
+      while (projectsGrid.firstChild) {
+        projectsGrid.removeChild(projectsGrid.firstChild);
+      }
       
       const filtered = allProjects
         .filter(p => {
@@ -955,10 +962,15 @@ body {
       observeCards();
     }
     
-    // Scroll reveal for cards
+    // Initialize or reuse intersection observer for card animations
     function observeCards() {
-      const cards = document.querySelectorAll('.project-card');
-      const observer = new IntersectionObserver((entries) => {
+      // Disconnect existing observer if it exists
+      if (cardObserver) {
+        cardObserver.disconnect();
+      }
+      
+      // Create new observer
+      cardObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
@@ -969,11 +981,12 @@ body {
         });
       }, { threshold: 0.1 });
       
+      const cards = document.querySelectorAll('.project-card');
       cards.forEach(card => {
         card.style.opacity = '0';
         card.style.transform = 'translateY(30px)';
         card.style.transition = 'all 0.6s ease';
-        observer.observe(card);
+        cardObserver.observe(card);
       });
     }
   </script>
