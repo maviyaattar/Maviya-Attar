@@ -77,9 +77,10 @@ header h1{
 @supports (background-clip: text) or (-webkit-background-clip: text){
   header h1{
     background:linear-gradient(135deg,var(--primary),var(--primary-light));
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
     background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
   }
 }
 
@@ -475,19 +476,6 @@ button:active,a.button:active{
   .card h4{font-size:1.1rem}
 }
 
-/* Stagger animation for cards */
-.card:nth-child(1){animation-delay:0.1s}
-.card:nth-child(2){animation-delay:0.15s}
-.card:nth-child(3){animation-delay:0.2s}
-.card:nth-child(4){animation-delay:0.25s}
-.card:nth-child(5){animation-delay:0.3s}
-.card:nth-child(6){animation-delay:0.35s}
-.card:nth-child(7){animation-delay:0.4s}
-.card:nth-child(8){animation-delay:0.45s}
-.card:nth-child(9){animation-delay:0.5s}
-.card:nth-child(10){animation-delay:0.55s}
-.card:nth-child(11){animation-delay:0.6s}
-.card:nth-child(12){animation-delay:0.65s}
 </style>
 </head>
 
@@ -639,8 +627,8 @@ function renderProjects(){
       const imgWrapper = document.createElement('div');
       imgWrapper.className = 'card-image-wrapper';
       const img = document.createElement('img');
-      img.src = escapeHtml(p.image);
-      img.alt = escapeHtml(p.name);
+      img.src = p.image;
+      img.alt = p.name;
       img.loading = 'lazy';
       imgWrapper.appendChild(img);
       card.appendChild(imgWrapper);
@@ -669,7 +657,7 @@ function renderProjects(){
     
     if(p.liveLink && isValidUrl(p.liveLink)){
       const liveBtn = document.createElement('a');
-      liveBtn.href = escapeHtml(p.liveLink);
+      liveBtn.href = p.liveLink;
       liveBtn.target = '_blank';
       liveBtn.rel = 'noopener noreferrer';
       liveBtn.textContent = '🚀 Live Demo';
@@ -678,7 +666,7 @@ function renderProjects(){
     
     if(p.sourceLink && isValidUrl(p.sourceLink)){
       const sourceBtn = document.createElement('a');
-      sourceBtn.href = escapeHtml(p.sourceLink);
+      sourceBtn.href = p.sourceLink;
       sourceBtn.target = '_blank';
       sourceBtn.rel = 'noopener noreferrer';
       sourceBtn.textContent = '💻 Source Code';
@@ -691,13 +679,7 @@ function renderProjects(){
   });
 }
 
-/* UTILITY FUNCTIONS FOR SECURITY */
-function escapeHtml(text){
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
+/* UTILITY FUNCTION FOR SECURITY */
 function isValidUrl(url){
   try {
     const urlObj = new URL(url);
