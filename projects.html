@@ -3,122 +3,507 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects</title>
+<title>Projects - Maviya Attar</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
 :root{
   --primary:hsl(250,66%,75%);
-  --bg:#0f1220;
-  --card:#1a1d33;
-  --text:#fff;
+  --primary-dark:hsl(250,66%,65%);
+  --primary-light:hsl(250,66%,85%);
+  --bg:#0a0e1a;
+  --card:#151925;
+  --card-hover:#1a1f2e;
+  --text:#e4e4e7;
+  --text-secondary:#94a3b8;
+  --border:rgba(148,163,184,0.1);
+  --shadow:rgba(0,0,0,0.3);
+  --glow:rgba(167,139,250,0.3);
+  --transition:all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 .light{
-  --bg:#fff;
-  --card:#f2f3ff;
-  --text:#000;
+  --bg:#f8fafc;
+  --card:#ffffff;
+  --card-hover:#f1f5f9;
+  --text:#0f172a;
+  --text-secondary:#64748b;
+  --border:rgba(148,163,184,0.2);
+  --shadow:rgba(0,0,0,0.1);
+  --glow:rgba(167,139,250,0.2);
 }
 
-*{box-sizing:border-box;font-family:Poppins,system-ui}
-body{
+*{
+  box-sizing:border-box;
   margin:0;
+  padding:0;
+}
+
+body{
+  font-family:'Poppins',sans-serif;
   background:var(--bg);
   color:var(--text);
-  padding:16px;
+  padding:0;
+  margin:0;
+  transition:var(--transition);
+  min-height:100vh;
+  background-image:radial-gradient(circle at 20% 50%,rgba(167,139,250,0.05) 0%,transparent 50%),
+                   radial-gradient(circle at 80% 80%,rgba(167,139,250,0.05) 0%,transparent 50%);
 }
 
+.container{
+  max-width:1400px;
+  margin:0 auto;
+  padding:20px;
+}
+
+/* Header Styles */
 header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  margin-bottom:14px;
+  margin-bottom:40px;
+  padding:20px 0;
+  animation:slideDown 0.6s ease-out;
 }
 
-button{
+header h1{
+  font-size:2rem;
+  font-weight:700;
+  color:var(--primary);
+}
+
+@supports (background-clip: text) or (-webkit-background-clip: text){
+  header h1{
+    background:linear-gradient(135deg,var(--primary),var(--primary-light));
+    background-clip:text;
+    -webkit-background-clip:text;
+    color:transparent;
+    -webkit-text-fill-color:transparent;
+  }
+}
+
+.header-actions{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+
+button,a.button{
   border:none;
-  padding:8px 14px;
-  border-radius:20px;
+  padding:10px 20px;
+  border-radius:12px;
   background:var(--card);
   color:var(--text);
   cursor:pointer;
+  font-weight:500;
+  transition:var(--transition);
+  border:1px solid var(--border);
+  font-size:0.95rem;
+  text-decoration:none;
+  display:inline-block;
 }
 
+button:hover,a.button:hover{
+  background:var(--card-hover);
+  transform:translateY(-2px);
+  box-shadow:0 8px 24px var(--shadow);
+}
+
+button:active,a.button:active{
+  transform:translateY(0);
+}
+
+#modeToggle{
+  width:44px;
+  height:44px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.3rem;
+  padding:0;
+}
+
+/* Search Bar */
+.search{
+  margin-bottom:30px;
+  position:relative;
+  animation:fadeIn 0.6s ease-out 0.2s backwards;
+}
+
+.search input{
+  width:100%;
+  padding:16px 20px;
+  padding-left:50px;
+  border-radius:16px;
+  border:2px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  font-size:1rem;
+  transition:var(--transition);
+  font-family:'Poppins',sans-serif;
+}
+
+.search input:focus{
+  outline:none;
+  border-color:var(--primary);
+  box-shadow:0 0 0 4px var(--glow);
+}
+
+.search::before{
+  content:"🔍";
+  position:absolute;
+  left:18px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:1.2rem;
+  opacity:0.5;
+}
+
+/* Filters */
 .filters{
   display:flex;
-  gap:8px;
+  gap:10px;
   overflow-x:auto;
-  margin-bottom:10px;
+  margin-bottom:40px;
+  padding:5px 0;
+  scrollbar-width:thin;
+  scrollbar-color:var(--primary) transparent;
+  animation:fadeIn 0.6s ease-out 0.3s backwards;
 }
+
+.filters::-webkit-scrollbar{
+  height:6px;
+}
+
+.filters::-webkit-scrollbar-track{
+  background:transparent;
+}
+
+.filters::-webkit-scrollbar-thumb{
+  background:var(--primary);
+  border-radius:10px;
+}
+
+.filters button{
+  white-space:nowrap;
+  padding:10px 24px;
+  font-weight:500;
+  position:relative;
+  overflow:hidden;
+}
+
+.filters button::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:-100%;
+  width:100%;
+  height:100%;
+  background:linear-gradient(90deg,transparent,var(--glow),transparent);
+  transition:left 0.5s;
+}
+
+.filters button:hover::before{
+  left:100%;
+}
+
 .filters button.active{
   background:var(--primary);
   color:#000;
+  box-shadow:0 4px 12px var(--glow);
+  font-weight:600;
 }
 
-.search{margin-bottom:10px}
-.search input{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:none;
+/* Skeleton Loader */
+.skeleton{
+  background:linear-gradient(90deg,var(--card) 25%,var(--card-hover) 50%,var(--card) 75%);
+  background-size:200% 100%;
+  animation:shimmer 1.5s infinite;
+  border-radius:14px;
+}
+
+@keyframes shimmer{
+  0%{background-position:200% 0}
+  100%{background-position:-200% 0}
+}
+
+.skeleton-card{
   background:var(--card);
-  color:var(--text);
+  border-radius:20px;
+  padding:20px;
+  border:1px solid var(--border);
+  height:100%;
 }
 
+.skeleton-image{
+  width:100%;
+  height:220px;
+  border-radius:14px;
+  margin-bottom:16px;
+}
+
+.skeleton-title{
+  height:24px;
+  width:70%;
+  border-radius:8px;
+  margin-bottom:12px;
+}
+
+.skeleton-text{
+  height:16px;
+  width:100%;
+  border-radius:6px;
+  margin-bottom:8px;
+}
+
+.skeleton-text:last-child{
+  width:80%;
+}
+
+/* Grid Layout */
 .grid{
   display:grid;
-  gap:14px;
+  gap:24px;
+  grid-template-columns:1fr;
 }
-@media(min-width:900px){
+
+@media(min-width:640px){
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+
+@media(min-width:1024px){
   .grid{grid-template-columns:repeat(3,1fr)}
 }
 
+@media(min-width:1400px){
+  .grid{grid-template-columns:repeat(4,1fr)}
+}
+
+/* Card Styles */
 .card{
   background:var(--card);
-  border-radius:14px;
-  padding:14px;
+  border-radius:20px;
+  padding:20px;
+  border:1px solid var(--border);
+  transition:var(--transition);
+  animation:fadeInUp 0.6s ease-out backwards;
+  position:relative;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  height:100%;
 }
-.card img{
+
+.card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:linear-gradient(90deg,var(--primary),var(--primary-light));
+  transform:scaleX(0);
+  transition:transform 0.3s ease;
+}
+
+.card:hover{
+  transform:translateY(-8px);
+  box-shadow:0 20px 40px var(--shadow),0 0 20px var(--glow);
+  border-color:var(--primary);
+}
+
+.card:hover::before{
+  transform:scaleX(1);
+}
+
+.card-image-wrapper{
+  position:relative;
   width:100%;
-  border-radius:10px;
+  padding-top:60%;
+  overflow:hidden;
+  border-radius:14px;
+  margin-bottom:16px;
+  background:var(--card-hover);
+}
+
+.card img{
+  position:absolute;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  border-radius:14px;
+  transition:transform 0.5s ease;
+}
+
+.card:hover img{
+  transform:scale(1.05);
+}
+
+.card-content{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+.card h4{
+  font-size:1.25rem;
+  font-weight:600;
+  margin-bottom:8px;
+  color:var(--text);
+  line-height:1.4;
+}
+
+.card small{
+  display:inline-block;
+  padding:4px 12px;
+  background:var(--primary);
+  color:#000;
+  border-radius:20px;
+  font-size:0.75rem;
+  font-weight:600;
+  margin-bottom:12px;
+  width:fit-content;
+}
+
+.card p{
+  color:var(--text-secondary);
+  line-height:1.6;
+  margin-bottom:16px;
+  flex:1;
+  font-size:0.9rem;
+}
+
+.actions{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:auto;
 }
 
 .actions a{
   display:inline-block;
-  margin-right:8px;
-  margin-top:8px;
-  padding:6px 14px;
+  padding:8px 16px;
   background:var(--primary);
   color:#000;
   text-decoration:none;
-  border-radius:20px;
+  border-radius:10px;
   font-weight:600;
+  font-size:0.85rem;
+  transition:var(--transition);
+  border:none;
 }
+
+.actions a:hover{
+  background:var(--primary-dark);
+  transform:translateY(-2px);
+  box-shadow:0 8px 16px var(--glow);
+}
+
+/* Empty State */
+.empty-state{
+  text-align:center;
+  padding:80px 20px;
+  animation:fadeIn 0.6s ease-out;
+}
+
+.empty-state-icon{
+  font-size:4rem;
+  margin-bottom:20px;
+  opacity:0.3;
+}
+
+.empty-state p{
+  color:var(--text-secondary);
+  font-size:1.1rem;
+}
+
+/* Loading State */
+.loading-text{
+  text-align:center;
+  padding:40px;
+  font-size:1.2rem;
+  color:var(--text-secondary);
+  animation:pulse 1.5s infinite;
+}
+
+/* Animations */
+@keyframes slideDown{
+  from{
+    opacity:0;
+    transform:translateY(-30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes fadeIn{
+  from{opacity:0}
+  to{opacity:1}
+}
+
+@keyframes fadeInUp{
+  from{
+    opacity:0;
+    transform:translateY(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes pulse{
+  0%,100%{opacity:1}
+  50%{opacity:0.5}
+}
+
+/* Responsive */
+@media(max-width:640px){
+  header h1{font-size:1.5rem}
+  .container{padding:16px}
+  header{margin-bottom:24px}
+  .search{margin-bottom:20px}
+  .filters{margin-bottom:24px;gap:8px}
+  .filters button{padding:8px 16px;font-size:0.85rem}
+  .card{padding:16px}
+  .card h4{font-size:1.1rem}
+}
+
 </style>
 </head>
 
 <body>
+<div class="container">
+  <header>
+    <h1>My Projects</h1>
+    <div class="header-actions">
+      <button id="modeToggle" onclick="toggleMode()" aria-label="Toggle theme">🌗</button>
+      <a href="index.html" class="button">← Home</a>
+    </div>
+  </header>
 
-<header>
-  <h3>Projects</h3>
-  <div>
-    <button onclick="toggleMode()">🌗</button>
-    <a href="index.html" style="color:var(--primary)">Home</a>
+  <div class="search">
+    <input id="search" placeholder="Search projects by name..." autocomplete="off">
   </div>
-</header>
 
-<div class="filters">
-  <button class="active" data="all">All</button>
-  <button data="static">Static</button>
-  <button data="fullstack">Fullstack</button>
-  <button data="ai">AI</button>
-  <button data="automation">Automation</button>
-  <button data="hacking">Hacking</button>
+  <div class="filters">
+    <button class="active" data="all">All</button>
+    <button data="static">Static</button>
+    <button data="fullstack">Fullstack</button>
+    <button data="ai">AI</button>
+    <button data="automation">Automation</button>
+    <button data="hacking">Hacking</button>
+  </div>
+
+  <div class="grid" id="list"></div>
 </div>
-
-<div class="search">
-  <input id="search" placeholder="Search projects...">
-</div>
-
-<div class="grid" id="list"></div>
 <script>
 const API = "https://portfolio-backend-api-8me4.onrender.com/projects";
 
@@ -128,6 +513,7 @@ const btns = document.querySelectorAll(".filters button");
 
 let allProjects = [];
 let currentCategory = "all";
+let isLoading = true;
 
 /* MODE TOGGLE */
 function toggleMode(){
@@ -141,7 +527,26 @@ if(localStorage.getItem("mode") === "light"){
   document.body.classList.add("light");
 }
 
+/* SKELETON LOADER */
+function renderSkeletons(count = 8){
+  list.innerHTML = "";
+  let skeletonsHTML = "";
+  for(let i = 0; i < count; i++){
+    skeletonsHTML += `
+      <div class="skeleton-card">
+        <div class="skeleton skeleton-image"></div>
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text"></div>
+      </div>
+    `;
+  }
+  list.innerHTML = skeletonsHTML;
+}
+
 /* LOAD PROJECTS */
+renderSkeletons();
+
 fetch(API)
   .then(res => {
     if (!res.ok) throw new Error("Failed to fetch projects");
@@ -149,11 +554,18 @@ fetch(API)
   })
   .then(data => {
     allProjects = data;
+    isLoading = false;
     renderProjects();
   })
   .catch(err => {
     console.error(err);
-    list.innerHTML = "<p>Failed to load projects.</p>";
+    isLoading = false;
+    list.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">⚠️</div>
+        <p>Failed to load projects. Please try again later.</p>
+      </div>
+    `;
   });
 
 /* CATEGORY FILTER */
@@ -167,12 +579,19 @@ btns.forEach(btn => {
 });
 
 /* SEARCH */
-search.addEventListener("input", renderProjects);
+search.addEventListener("input", () => {
+  renderProjects();
+});
 
-/* RENDER PROJECTS (IMAGE OPTIONAL + MULTI CATEGORY SAFE) */
+/* RENDER PROJECTS */
 function renderProjects(){
   const query = search.value.toLowerCase().trim();
   list.innerHTML = "";
+
+  if(isLoading){
+    renderSkeletons();
+    return;
+  }
 
   const filtered = allProjects
     .filter(p => {
@@ -185,24 +604,89 @@ function renderProjects(){
     .filter(p => p.name.toLowerCase().includes(query));
 
   if(filtered.length === 0){
-    list.innerHTML = "<p>No projects found.</p>";
+    list.innerHTML = `
+      <div class="empty-state">
+        <div class="empty-state-icon">🔍</div>
+        <p>No projects found matching your criteria.</p>
+      </div>
+    `;
     return;
   }
 
-  filtered.forEach(p => {
-    list.innerHTML += `
-      <div class="card">
-        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : ""}
-        <h4>${p.name}</h4>
-        <small>${p.stack}</small>
-        <p>${p.description}</p>
-        <div class="actions">
-          ${p.liveLink ? `<a href="${p.liveLink}" target="_blank">Live</a>` : ""}
-          ${p.sourceLink ? `<a href="${p.sourceLink}" target="_blank">Code</a>` : ""}
-        </div>
-      </div>
-    `;
+  filtered.forEach((p, index) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.style.animationDelay = `${index * 0.05}s`;
+    
+    // Create card content safely
+    const cardContent = document.createElement('div');
+    cardContent.className = 'card-content';
+    
+    // Add image if exists
+    if(p.image && isValidUrl(p.image)){
+      const imgWrapper = document.createElement('div');
+      imgWrapper.className = 'card-image-wrapper';
+      const img = document.createElement('img');
+      img.src = p.image;
+      img.alt = p.name;
+      img.loading = 'lazy';
+      imgWrapper.appendChild(img);
+      card.appendChild(imgWrapper);
+    }
+    
+    // Add title
+    const title = document.createElement('h4');
+    title.textContent = p.name;
+    cardContent.appendChild(title);
+    
+    // Add stack badge
+    if(p.stack){
+      const stack = document.createElement('small');
+      stack.textContent = p.stack;
+      cardContent.appendChild(stack);
+    }
+    
+    // Add description
+    const description = document.createElement('p');
+    description.textContent = p.description;
+    cardContent.appendChild(description);
+    
+    // Add action buttons
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    
+    if(p.liveLink && isValidUrl(p.liveLink)){
+      const liveBtn = document.createElement('a');
+      liveBtn.href = p.liveLink;
+      liveBtn.target = '_blank';
+      liveBtn.rel = 'noopener noreferrer';
+      liveBtn.textContent = '🚀 Live Demo';
+      actions.appendChild(liveBtn);
+    }
+    
+    if(p.sourceLink && isValidUrl(p.sourceLink)){
+      const sourceBtn = document.createElement('a');
+      sourceBtn.href = p.sourceLink;
+      sourceBtn.target = '_blank';
+      sourceBtn.rel = 'noopener noreferrer';
+      sourceBtn.textContent = '💻 Source Code';
+      actions.appendChild(sourceBtn);
+    }
+    
+    cardContent.appendChild(actions);
+    card.appendChild(cardContent);
+    list.appendChild(card);
   });
+}
+
+/* UTILITY FUNCTION FOR SECURITY */
+function isValidUrl(url){
+  try {
+    const urlObj = new URL(url);
+    return urlObj.protocol === 'http:' || urlObj.protocol === 'https:';
+  } catch {
+    return false;
+  }
 }
 </script>
 </body>
