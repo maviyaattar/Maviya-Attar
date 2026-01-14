@@ -1217,3 +1217,194 @@ body.light-theme {
     border-radius: 0.5rem;
   }
 }
+
+/*=============== LOADING SCREEN ===============*/
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--body-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.loading-content {
+  text-align: center;
+}
+
+.loading-logo {
+  font-size: 3rem;
+  font-weight: var(--font-semibold);
+  color: var(--first-color);
+  animation: loadingPulse 1.5s ease-in-out infinite;
+}
+
+@keyframes loadingPulse {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.05);
+  }
+}
+
+/*=============== SKELETON LOADERS ===============*/
+.skeleton-loader {
+  padding: 1rem;
+}
+
+.skeleton-item {
+  background: linear-gradient(
+    90deg,
+    var(--container-color) 25%,
+    hsla(var(--second-hue), 32%, 20%, 0.5) 50%,
+    var(--container-color) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+  height: 50px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-item-large {
+  height: 150px;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/*=============== ENHANCED BUTTON ANIMATIONS ===============*/
+.button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  column-gap: 0.5rem;
+  background-color: var(--first-color);
+  color: var(--body-color);
+  padding: 0.75rem 1.5rem;
+  border-radius: 3rem;
+  font-weight: var(--font-medium);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+  z-index: -1;
+}
+
+.button:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.button:hover {
+  background-color: var(--first-color-alt);
+  box-shadow: 0 8px 24px hsla(var(--first-hue), var(--sat), var(--lig), 0.4);
+  transform: translateY(-4px);
+}
+
+.button:active {
+  transform: translateY(-2px);
+}
+
+.button i {
+  font-size: 1rem;
+}
+
+/*=============== ENHANCED HOVER EFFECTS ===============*/
+.home__social-link,
+.contact__button,
+.footer__social-link {
+  transition: all 0.3s ease;
+}
+
+.home__social-link:hover,
+.contact__button:hover,
+.footer__social-link:hover {
+  transform: translateY(-4px);
+  color: var(--first-color);
+}
+
+.nav__link {
+  transition: all 0.3s ease;
+}
+
+.nav__link:hover {
+  color: var(--first-color);
+  transform: scale(1.1);
+}
+
+.work__card,
+.services__card,
+.skills__content,
+.about__box {
+  transition: all 0.3s ease;
+}
+
+.work__card:hover,
+.services__card:hover,
+.skills__content:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 32px hsla(var(--second-hue), 48%, 8%, 0.3);
+}
+
+.about__box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px hsla(var(--second-hue), 48%, 8%, 0.2);
+}
+
+/*=============== SCROLL REVEAL ENHANCEMENTS ===============*/
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*=============== MOBILE RESPONSIVE TOUCH IMPROVEMENTS ===============*/
+@media (hover: none) and (pointer: coarse) {
+  .button:active {
+    transform: scale(0.95);
+  }
+  
+  .nav__link:active,
+  .home__social-link:active,
+  .contact__button:active {
+    transform: scale(0.95);
+  }
+}

@@ -18,6 +18,9 @@
     <!--=============== BOXICONS ===============-->
     <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
+    <!--=============== FONT AWESOME ===============-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <!--=============== SWIPER CSS ===============-->
     <link rel="stylesheet" href="assets/css/swiper-bundle.min.css">
 
@@ -73,6 +76,13 @@
 </head>
 
 <body>
+    <!--=============== LOADING ANIMATION ===============-->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <h1 class="loading-logo">معاویہ『AM』</h1>
+        </div>
+    </div>
+
     <!--=============== HEADER ===============-->
     <header class="header" id="header">
         <nav class="nav container">
@@ -133,10 +143,14 @@
 
                     <div class="home__button">
                         <a download="" href="assets/pdf/Maviya-Cv.pdf" class="button button--ghost">
+                            <i class="fa-solid fa-download"></i>
                             Download CV
                         </a>
 
-                        <a href="#about" class="button">About</a>
+                        <a href="#about" class="button">
+                            <i class="fa-solid fa-user"></i>
+                            About
+                        </a>
                     </div>
                 </div>
 
@@ -196,7 +210,10 @@
     systems, and experimenting with AI-powered tools.
 </p>
 
-                    <a href="#contact" class="button about__button-contact">Contact Me</a>
+                    <a href="#contact" class="button about__button-contact">
+                        <i class="fa-solid fa-paper-plane"></i>
+                        Contact Me
+                    </a>
                 </div>
             </div>
         </section>
@@ -733,6 +750,13 @@
             <h3 class="contact__title contact__title-form">Write Me your Message</h3>
 
             <form class="contact__form" id="contactForm">
+    <div class="skeleton-loader" id="contactSkeleton" style="display: none;">
+        <div class="skeleton-item"></div>
+        <div class="skeleton-item"></div>
+        <div class="skeleton-item skeleton-item-large"></div>
+    </div>
+    
+    <div id="contactFormFields">
     <div class="contact__form-div">
         <label class="contact__form-tag">Name</label>
         <input type="text" placeholder="Enter your name"
@@ -758,8 +782,10 @@
     </div>
 
     <button class="button" id="contactBtn">
+        <i class="fa-solid fa-paper-plane"></i>
         Send Message
     </button>
+    </div>
 </form>
         </div>
 </section>
@@ -840,12 +866,26 @@
      ===============-->
      
      <script>
+// Loading Screen Animation
+window.addEventListener('load', function() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    setTimeout(() => {
+        loadingScreen.classList.add('fade-out');
+        setTimeout(() => {
+            loadingScreen.style.display = 'none';
+        }, 800);
+    }, 1500);
+});
+
+// Contact Form with Skeleton Loader
 (function(){
   const API = "https://portfolio-backend-api-8me4.onrender.com/contact";
 
   const form = document.getElementById("contactForm");
   const btn  = document.getElementById("contactBtn");
   const alertBox = document.getElementById("contactAlert");
+  const skeleton = document.getElementById("contactSkeleton");
+  const formFields = document.getElementById("contactFormFields");
 
   function showAlert(msg, error=false){
     alertBox.innerText = msg;
@@ -893,7 +933,7 @@
       showAlert("❌ " + err.message, true);
     }
 
-    btn.innerText = "Send Message";
+    btn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
     btn.disabled = false;
   });
 })();
