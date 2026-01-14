@@ -3,207 +3,990 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Projects</title>
+<title>Projects | Maviya Attar</title>
+
+<!--=============== GOOGLE FONTS ===============-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+
+<!--=============== FONT AWESOME ===============-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!--=============== BOXICONS ===============-->
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
 
 <style>
 :root{
-  --primary:hsl(250,66%,75%);
-  --bg:#0f1220;
-  --card:#1a1d33;
-  --text:#fff;
+  --primary: hsl(250, 66%, 75%);
+  --primary-dark: hsl(250, 66%, 65%);
+  --bg: hsl(219, 48%, 8%);
+  --card: hsl(219, 32%, 12%);
+  --card-hover: hsl(219, 32%, 15%);
+  --text: hsl(219, 8%, 75%);
+  --text-light: hsl(219, 4%, 55%);
+  --title: hsl(219, 15%, 95%);
+  --border: hsl(219, 32%, 20%);
+  --shadow: rgba(0, 0, 0, 0.3);
 }
+
 .light{
-  --bg:#fff;
-  --card:#f2f3ff;
-  --text:#000;
+  --bg: hsl(219, 100%, 99%);
+  --card: #f2f3ff;
+  --card-hover: #e8e9f7;
+  --text: hsl(219, 8%, 35%);
+  --text-light: hsl(219, 4%, 55%);
+  --title: hsl(219, 15%, 15%);
+  --border: hsl(219, 32%, 90%);
+  --shadow: rgba(0, 0, 0, 0.1);
 }
 
-*{box-sizing:border-box;font-family:Poppins,system-ui}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  padding:16px;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
 }
 
-button{
-  border:none;
-  padding:8px 14px;
-  border-radius:20px;
-  background:var(--card);
-  color:var(--text);
-  cursor:pointer;
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem;
 }
 
-.filters{
-  display:flex;
-  gap:8px;
-  overflow-x:auto;
-  margin-bottom:10px;
-}
-.filters button.active{
-  background:var(--primary);
-  color:#000;
-}
-
-.search{margin-bottom:10px}
-.search input{
-  width:100%;
-  padding:10px;
-  border-radius:8px;
-  border:none;
-  background:var(--card);
-  color:var(--text);
+/*=============== HEADER ===============*/
+.header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 1.5rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 16px var(--shadow);
 }
 
-.grid{
-  display:grid;
-  gap:14px;
-}
-@media(min-width:900px){
-  .grid{grid-template-columns:repeat(3,1fr)}
+.header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.card{
-  background:var(--card);
-  border-radius:14px;
-  padding:14px;
-}
-.card img{
-  width:100%;
-  border-radius:10px;
+.header__logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s ease;
 }
 
-.actions a{
-  display:inline-block;
-  margin-right:8px;
-  margin-top:8px;
-  padding:6px 14px;
-  background:var(--primary);
-  color:#000;
-  text-decoration:none;
-  border-radius:20px;
-  font-weight:600;
+.header__logo:hover {
+  color: var(--primary-dark);
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle,
+.home-link {
+  background: var(--card-hover);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 1.2rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 1rem;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover,
+.home-link:hover {
+  background: var(--primary);
+  color: var(--bg);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+/*=============== MAIN CONTENT ===============*/
+.main {
+  padding: 2rem 0;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.page-title h1 {
+  font-size: 2.5rem;
+  color: var(--title);
+  margin-bottom: 0.5rem;
+}
+
+.page-title p {
+  color: var(--text-light);
+  font-size: 1.1rem;
+}
+
+/*=============== FILTERS ===============*/
+.filters-section {
+  margin-bottom: 2rem;
+}
+
+.filters-desktop {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-btn {
+  background: var(--card);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 0.6rem 1.5rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.filter-btn.active {
+  background: var(--primary);
+  color: var(--bg);
+  border-color: var(--primary);
+  box-shadow: 0 4px 12px hsla(250, 66%, 75%, 0.4);
+}
+
+.filter-mobile-btn {
+  display: none;
+  width: 100%;
+  background: var(--card);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.filter-mobile-btn:hover {
+  border-color: var(--primary);
+  background: var(--card-hover);
+}
+
+/*=============== SEARCH ===============*/
+.search-section {
+  margin-bottom: 2rem;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  display: block;
+  padding: 1rem 1.5rem;
+  background: var(--card);
+  border: 2px solid var(--border);
+  border-radius: 3rem;
+  color: var(--text);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px var(--shadow);
+}
+
+.search-input::placeholder {
+  color: var(--text-light);
+}
+
+/*=============== PROJECT CARDS ===============*/
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+
+.project-card {
+  background: var(--card);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  transition: all 0.4s ease;
+  cursor: pointer;
+  position: relative;
+}
+
+.project-card.featured {
+  grid-column: span 2;
+}
+
+.project-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 20px 40px var(--shadow);
+  border-color: var(--primary);
+}
+
+.project-image {
+  width: 100%;
+  height: 220px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.project-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-image img {
+  transform: scale(1.1);
+}
+
+.project-image.placeholder {
+  background: linear-gradient(135deg, 
+    hsl(250, 66%, 75%) 0%, 
+    hsl(250, 66%, 65%) 100%);
+}
+
+.project-image.placeholder i {
+  font-size: 4rem;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.project-content {
+  padding: 1.5rem;
+}
+
+.project-title {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--title);
+  margin-bottom: 0.75rem;
+}
+
+.project-description {
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1rem;
+}
+
+.project-tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.tech-tag {
+  background: var(--bg);
+  color: var(--primary);
+  padding: 0.4rem 0.9rem;
+  border-radius: 1.5rem;
+  font-size: 0.85rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid var(--border);
+}
+
+.tech-tag i {
+  font-size: 0.9rem;
+}
+
+.project-actions {
+  display: flex;
+  gap: 0.75rem;
+}
+
+.action-btn {
+  flex: 1;
+  background: var(--primary);
+  color: var(--bg);
+  padding: 0.75rem 1.25rem;
+  border-radius: 2rem;
+  text-decoration: none;
+  font-weight: 600;
+  text-align: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+  border: 2px solid var(--primary);
+}
+
+.action-btn.secondary {
+  background: transparent;
+  color: var(--primary);
+}
+
+.action-btn:hover {
+  background: var(--primary-dark);
+  border-color: var(--primary-dark);
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px hsla(250, 66%, 75%, 0.4);
+}
+
+.action-btn.secondary:hover {
+  background: var(--primary);
+  color: var(--bg);
+}
+
+/*=============== SKELETON LOADER ===============*/
+.skeleton-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+}
+
+.skeleton-card {
+  background: var(--card);
+  border-radius: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  padding: 1.5rem;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--card) 25%,
+    var(--card-hover) 50%,
+    var(--card) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
+}
+
+.skeleton-image {
+  width: 100%;
+  height: 220px;
+  margin-bottom: 1rem;
+}
+
+.skeleton-title {
+  height: 28px;
+  width: 80%;
+  margin-bottom: 1rem;
+}
+
+.skeleton-text {
+  height: 16px;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-tags {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1rem 0;
+}
+
+.skeleton-tag {
+  height: 28px;
+  width: 80px;
+  border-radius: 1rem;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/*=============== MOBILE FILTER MODAL ===============*/
+.filter-modal {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--card);
+  border-top-left-radius: 2rem;
+  border-top-right-radius: 2rem;
+  padding: 2rem;
+  box-shadow: 0 -4px 32px var(--shadow);
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.filter-modal.active {
+  display: block;
+  transform: translateY(0);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  color: var(--title);
+  font-weight: 700;
+}
+
+.modal-close {
+  background: var(--bg);
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+  background: var(--primary);
+  color: var(--bg);
+}
+
+.filter-options {
+  display: grid;
+  gap: 1rem;
+}
+
+.filter-option {
+  background: var(--bg);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: left;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.filter-option:hover {
+  border-color: var(--primary);
+  background: var(--card-hover);
+}
+
+.filter-option.active {
+  background: var(--primary);
+  color: var(--bg);
+  border-color: var(--primary);
+}
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: block;
+  opacity: 1;
+}
+
+/*=============== EMPTY STATE ===============*/
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.empty-state i {
+  font-size: 5rem;
+  color: var(--text-light);
+  margin-bottom: 1rem;
+}
+
+.empty-state h3 {
+  font-size: 1.5rem;
+  color: var(--title);
+  margin-bottom: 0.5rem;
+}
+
+.empty-state p {
+  color: var(--text-light);
+}
+
+/*=============== RESPONSIVE ===============*/
+@media (max-width: 768px) {
+  .filters-desktop {
+    display: none;
+  }
+  
+  .filter-mobile-btn {
+    display: block;
+  }
+  
+  .project-card.featured {
+    grid-column: span 1;
+  }
+  
+  .projects-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  
+  .page-title h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (hover: none) and (pointer: coarse) {
+  .project-card:active {
+    transform: scale(0.98);
+  }
+  
+  .filter-btn:active,
+  .action-btn:active {
+    transform: scale(0.95);
+  }
 }
 </style>
 </head>
 
 <body>
+  <!--=============== HEADER ===============-->
+  <header class="header">
+    <div class="container header__content">
+      <a href="index.html" class="header__logo" lang="ar" aria-label="Maviya Attar Logo">معاویہ『AM』</a>
+      <div class="header__actions">
+        <button class="theme-toggle" onclick="toggleMode()" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon" id="themeIcon"></i>
+        </button>
+        <a href="index.html" class="home-link">
+          <i class="fa-solid fa-home"></i>
+          <span>Home</span>
+        </a>
+      </div>
+    </div>
+  </header>
 
-<header>
-  <h3>Projects</h3>
-  <div>
-    <button onclick="toggleMode()">🌗</button>
-    <a href="index.html" style="color:var(--primary)">Home</a>
-  </div>
-</header>
+  <!--=============== MAIN ===============-->
+  <main class="main">
+    <div class="container">
+      <!--=============== PAGE TITLE ===============-->
+      <div class="page-title">
+        <h1>My Projects</h1>
+        <p>Explore my work in web development, automation, AI, and more</p>
+      </div>
 
-<div class="filters">
-  <button class="active" data="all">All</button>
-  <button data="static">Static</button>
-  <button data="fullstack">Fullstack</button>
-  <button data="ai">AI</button>
-  <button data="automation">Automation</button>
-  <button data="hacking">Hacking</button>
-</div>
+      <!--=============== FILTERS ===============-->
+      <div class="filters-section">
+        <div class="filters-desktop" id="filtersDesktop">
+          <button class="filter-btn active" data-filter="all">
+            <i class="fa-solid fa-globe"></i> All
+          </button>
+          <button class="filter-btn" data-filter="static">
+            <i class="fa-solid fa-file-code"></i> Static
+          </button>
+          <button class="filter-btn" data-filter="fullstack">
+            <i class="fa-solid fa-server"></i> Fullstack
+          </button>
+          <button class="filter-btn" data-filter="ai">
+            <i class="fa-solid fa-brain"></i> AI
+          </button>
+          <button class="filter-btn" data-filter="automation">
+            <i class="fa-solid fa-robot"></i> Automation
+          </button>
+          <button class="filter-btn" data-filter="hacking">
+            <i class="fa-solid fa-shield-halved"></i> Hacking
+          </button>
+        </div>
+        
+        <button class="filter-mobile-btn" onclick="openFilterModal()">
+          <i class="fa-solid fa-filter"></i> Filter Projects
+        </button>
+      </div>
 
-<div class="search">
-  <input id="search" placeholder="Search projects...">
-</div>
+      <!--=============== SEARCH ===============-->
+      <div class="search-section">
+        <input 
+          type="text" 
+          class="search-input" 
+          id="searchInput" 
+          placeholder="🔍 Search projects by name or technology..."
+        >
+      </div>
 
-<div class="grid" id="list"></div>
-<script>
-const API = "https://portfolio-backend-api-8me4.onrender.com/projects";
-
-const list = document.getElementById("list");
-const search = document.getElementById("search");
-const btns = document.querySelectorAll(".filters button");
-
-let allProjects = [];
-let currentCategory = "all";
-
-/* MODE TOGGLE */
-function toggleMode(){
-  document.body.classList.toggle("light");
-  localStorage.setItem(
-    "mode",
-    document.body.classList.contains("light") ? "light" : "dark"
-  );
-}
-if(localStorage.getItem("mode") === "light"){
-  document.body.classList.add("light");
-}
-
-/* LOAD PROJECTS */
-fetch(API)
-  .then(res => {
-    if (!res.ok) throw new Error("Failed to fetch projects");
-    return res.json();
-  })
-  .then(data => {
-    allProjects = data;
-    renderProjects();
-  })
-  .catch(err => {
-    console.error(err);
-    list.innerHTML = "<p>Failed to load projects.</p>";
-  });
-
-/* CATEGORY FILTER */
-btns.forEach(btn => {
-  btn.addEventListener("click", () => {
-    btns.forEach(b => b.classList.remove("active"));
-    btn.classList.add("active");
-    currentCategory = btn.getAttribute("data");
-    renderProjects();
-  });
-});
-
-/* SEARCH */
-search.addEventListener("input", renderProjects);
-
-/* RENDER PROJECTS (IMAGE OPTIONAL + MULTI CATEGORY SAFE) */
-function renderProjects(){
-  const query = search.value.toLowerCase().trim();
-  list.innerHTML = "";
-
-  const filtered = allProjects
-    .filter(p => {
-      if (currentCategory === "all") return true;
-      if (Array.isArray(p.categories)) {
-        return p.categories.includes(currentCategory);
-      }
-      return p.category === currentCategory;
-    })
-    .filter(p => p.name.toLowerCase().includes(query));
-
-  if(filtered.length === 0){
-    list.innerHTML = "<p>No projects found.</p>";
-    return;
-  }
-
-  filtered.forEach(p => {
-    list.innerHTML += `
-      <div class="card">
-        ${p.image ? `<img src="${p.image}" alt="${p.name}">` : ""}
-        <h4>${p.name}</h4>
-        <small>${p.stack}</small>
-        <p>${p.description}</p>
-        <div class="actions">
-          ${p.liveLink ? `<a href="${p.liveLink}" target="_blank">Live</a>` : ""}
-          ${p.sourceLink ? `<a href="${p.sourceLink}" target="_blank">Code</a>` : ""}
+      <!--=============== SKELETON LOADER ===============-->
+      <div class="skeleton-grid" id="skeletonLoader">
+        <div class="skeleton-card">
+          <div class="skeleton skeleton-image"></div>
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text" style="width: 80%;"></div>
+          <div class="skeleton-tags">
+            <div class="skeleton skeleton-tag"></div>
+            <div class="skeleton skeleton-tag"></div>
+            <div class="skeleton skeleton-tag"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton skeleton-image"></div>
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text" style="width: 80%;"></div>
+          <div class="skeleton-tags">
+            <div class="skeleton skeleton-tag"></div>
+            <div class="skeleton skeleton-tag"></div>
+            <div class="skeleton skeleton-tag"></div>
+          </div>
+        </div>
+        <div class="skeleton-card">
+          <div class="skeleton skeleton-image"></div>
+          <div class="skeleton skeleton-title"></div>
+          <div class="skeleton skeleton-text"></div>
+          <div class="skeleton skeleton-text" style="width: 80%;"></div>
+          <div class="skeleton-tags">
+            <div class="skeleton skeleton-tag"></div>
+            <div class="skeleton skeleton-tag"></div>
+            <div class="skeleton skeleton-tag"></div>
+          </div>
         </div>
       </div>
-    `;
-  });
-}
-</script>
+
+      <!--=============== PROJECTS GRID ===============-->
+      <div class="projects-grid" id="projectsGrid" style="display: none;"></div>
+      
+      <!--=============== EMPTY STATE ===============-->
+      <div class="empty-state" id="emptyState" style="display: none;">
+        <i class="fa-solid fa-inbox"></i>
+        <h3>No projects found</h3>
+        <p>Try adjusting your search or filter</p>
+      </div>
+    </div>
+  </main>
+
+  <!--=============== MOBILE FILTER MODAL ===============-->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeFilterModal()"></div>
+  <div class="filter-modal" id="filterModal">
+    <div class="modal-header">
+      <h2 class="modal-title">Filter Projects</h2>
+      <button class="modal-close" onclick="closeFilterModal()">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+    </div>
+    <div class="filter-options" id="filterOptions">
+      <button class="filter-option active" data-filter="all">
+        <i class="fa-solid fa-globe"></i> All Projects
+      </button>
+      <button class="filter-option" data-filter="static">
+        <i class="fa-solid fa-file-code"></i> Static Websites
+      </button>
+      <button class="filter-option" data-filter="fullstack">
+        <i class="fa-solid fa-server"></i> Fullstack Applications
+      </button>
+      <button class="filter-option" data-filter="ai">
+        <i class="fa-solid fa-brain"></i> AI Projects
+      </button>
+      <button class="filter-option" data-filter="automation">
+        <i class="fa-solid fa-robot"></i> Automation Tools
+      </button>
+      <button class="filter-option" data-filter="hacking">
+        <i class="fa-solid fa-shield-halved"></i> Hacking & Security
+      </button>
+    </div>
+  </div>
+
+  <!--=============== JAVASCRIPT ===============-->
+  <script>
+    const API = "https://portfolio-backend-api-8me4.onrender.com/projects";
+    
+    let allProjects = [];
+    let currentCategory = "all";
+    
+    const projectsGrid = document.getElementById("projectsGrid");
+    const skeletonLoader = document.getElementById("skeletonLoader");
+    const emptyState = document.getElementById("emptyState");
+    const searchInput = document.getElementById("searchInput");
+    const filterBtns = document.querySelectorAll(".filter-btn");
+    const filterOptions = document.querySelectorAll(".filter-option");
+    const filterModal = document.getElementById("filterModal");
+    const modalOverlay = document.getElementById("modalOverlay");
+    
+    // Intersection observer for card animations (created once)
+    let cardObserver = null;
+    
+    // Tech stack icons mapping
+    const techIcons = {
+      'html': 'fa-brands fa-html5',
+      'css': 'fa-brands fa-css3-alt',
+      'javascript': 'fa-brands fa-js',
+      'js': 'fa-brands fa-js',
+      'react': 'fa-brands fa-react',
+      'node': 'fa-brands fa-node',
+      'python': 'fa-brands fa-python',
+      'php': 'fa-brands fa-php',
+      'mongodb': 'fa-solid fa-database',
+      'mysql': 'fa-solid fa-database',
+      'firebase': 'fa-solid fa-fire',
+      'git': 'fa-brands fa-git-alt',
+      'api': 'fa-solid fa-plug',
+      'default': 'fa-solid fa-code'
+    };
+    
+    // Theme toggle
+    function toggleMode() {
+      document.body.classList.toggle("light");
+      const icon = document.getElementById("themeIcon");
+      if (document.body.classList.contains("light")) {
+        icon.className = "fa-solid fa-sun";
+        localStorage.setItem("projectsMode", "light");
+      } else {
+        icon.className = "fa-solid fa-moon";
+        localStorage.setItem("projectsMode", "dark");
+      }
+    }
+    
+    // Load saved theme
+    if (localStorage.getItem("projectsMode") === "light") {
+      document.body.classList.add("light");
+      document.getElementById("themeIcon").className = "fa-solid fa-sun";
+    }
+    
+    // Filter modal
+    function openFilterModal() {
+      filterModal.classList.add("active");
+      modalOverlay.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+    
+    function closeFilterModal() {
+      filterModal.classList.remove("active");
+      modalOverlay.classList.remove("active");
+      document.body.style.overflow = "";
+    }
+    
+    // Load projects
+    fetch(API)
+      .then(res => {
+        if (!res.ok) throw new Error("Failed to fetch projects");
+        return res.json();
+      })
+      .then(data => {
+        allProjects = data;
+        setTimeout(() => {
+          skeletonLoader.style.display = "none";
+          projectsGrid.style.display = "grid";
+          renderProjects();
+        }, 800);
+      })
+      .catch(err => {
+        console.error(err);
+        skeletonLoader.style.display = "none";
+        emptyState.style.display = "block";
+        emptyState.innerHTML = `
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <h3>Failed to load projects</h3>
+          <p>Please try again later</p>
+        `;
+      });
+    
+    // Category filter - Desktop
+    filterBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+        filterBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        currentCategory = btn.getAttribute("data-filter");
+        renderProjects();
+      });
+    });
+    
+    // Category filter - Mobile
+    filterOptions.forEach(opt => {
+      opt.addEventListener("click", () => {
+        filterOptions.forEach(o => o.classList.remove("active"));
+        opt.classList.add("active");
+        currentCategory = opt.getAttribute("data-filter");
+        
+        // Update desktop buttons
+        filterBtns.forEach(btn => {
+          btn.classList.toggle("active", btn.getAttribute("data-filter") === currentCategory);
+        });
+        
+        renderProjects();
+        closeFilterModal();
+      });
+    });
+    
+    // Search
+    searchInput.addEventListener("input", renderProjects);
+    
+    // Get tech icon
+    function getTechIcon(tech) {
+      const techLower = tech.toLowerCase();
+      for (const [key, icon] of Object.entries(techIcons)) {
+        if (techLower.includes(key)) return icon;
+      }
+      return techIcons.default;
+    }
+    
+    // Render projects
+    function renderProjects() {
+      const query = searchInput.value.toLowerCase().trim();
+      
+      // Clear existing content (compatible approach)
+      projectsGrid.innerHTML = '';
+      
+      const filtered = allProjects
+        .filter(p => {
+          if (currentCategory === "all") return true;
+          if (Array.isArray(p.categories)) {
+            return p.categories.includes(currentCategory);
+          }
+          return p.category === currentCategory;
+        })
+        .filter(p => 
+          p.name.toLowerCase().includes(query) ||
+          (p.stack && p.stack.toLowerCase().includes(query)) ||
+          (p.description && p.description.toLowerCase().includes(query))
+        );
+      
+      if (filtered.length === 0) {
+        projectsGrid.style.display = "none";
+        emptyState.style.display = "block";
+        return;
+      }
+      
+      projectsGrid.style.display = "grid";
+      emptyState.style.display = "none";
+      
+      filtered.forEach((project, index) => {
+        const card = document.createElement("div");
+        card.className = "project-card";
+        if (project.featured || index === 0) {
+          card.classList.add("featured");
+        }
+        
+        // Parse tech stack
+        const techStack = project.stack ? project.stack.split(',').map(t => t.trim()) : [];
+        const techTags = techStack.slice(0, 4).map(tech => {
+          const icon = getTechIcon(tech);
+          return `<span class="tech-tag"><i class="${icon}"></i> ${tech}</span>`;
+        }).join('');
+        
+        card.innerHTML = `
+          <div class="project-image ${project.image ? '' : 'placeholder'}">
+            ${project.image 
+              ? `<img src="${project.image}" alt="${project.name}" loading="lazy">` 
+              : `<i class="fa-solid fa-code"></i>`
+            }
+          </div>
+          <div class="project-content">
+            <h3 class="project-title">${project.name}</h3>
+            <p class="project-description">${project.description || 'No description available'}</p>
+            <div class="project-tech">${techTags}</div>
+            <div class="project-actions">
+              ${project.liveLink 
+                ? `<a href="${project.liveLink}" target="_blank" class="action-btn">
+                     <i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo
+                   </a>` 
+                : ''
+              }
+              ${project.sourceLink 
+                ? `<a href="${project.sourceLink}" target="_blank" class="action-btn secondary">
+                     <i class="fa-brands fa-github"></i> Source Code
+                   </a>` 
+                : ''
+              }
+            </div>
+          </div>
+        `;
+        
+        projectsGrid.appendChild(card);
+      });
+      
+      // Reinitialize card animations
+      reinitializeCardObserver();
+    }
+    
+    // Reinitialize intersection observer for card animations
+    function reinitializeCardObserver() {
+      // Disconnect existing observer if it exists
+      if (cardObserver) {
+        cardObserver.disconnect();
+      }
+      
+      // Create new observer
+      cardObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => {
+              entry.target.style.opacity = '1';
+              entry.target.style.transform = 'translateY(0)';
+            }, index * 100);
+          }
+        });
+      }, { threshold: 0.1 });
+      
+      const cards = document.querySelectorAll('.project-card');
+      cards.forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(30px)';
+        card.style.transition = 'all 0.6s ease';
+        cardObserver.observe(card);
+      });
+    }
+  </script>
 </body>
 </html>
