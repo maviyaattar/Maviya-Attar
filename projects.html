@@ -405,16 +405,51 @@ function renderProjects(){
     card.className = 'card';
     card.setAttribute('role', 'listitem');
     
-    card.innerHTML = `
-      ${p.image ? `<img src="${p.image}" alt="${p.name}" loading="lazy">` : ""}
-      <h4>${p.name}</h4>
-      <small>${p.stack || 'Project'}</small>
-      <p>${p.description || 'No description available.'}</p>
-      <div class="actions">
-        ${p.liveLink ? `<a href="${p.liveLink}" target="_blank" rel="noopener noreferrer">Live Demo</a>` : ""}
-        ${p.sourceLink ? `<a href="${p.sourceLink}" target="_blank" rel="noopener noreferrer">Source Code</a>` : ""}
-      </div>
-    `;
+    // Create elements safely to prevent XSS
+    if (p.image) {
+      const img = document.createElement('img');
+      img.src = p.image;
+      img.alt = p.name || 'Project image';
+      img.loading = 'lazy';
+      card.appendChild(img);
+    }
+    
+    const title = document.createElement('h4');
+    title.textContent = p.name || 'Untitled Project';
+    card.appendChild(title);
+    
+    const stack = document.createElement('small');
+    stack.textContent = p.stack || 'Project';
+    card.appendChild(stack);
+    
+    const description = document.createElement('p');
+    description.textContent = p.description || 'No description available.';
+    card.appendChild(description);
+    
+    const actions = document.createElement('div');
+    actions.className = 'actions';
+    
+    if (p.liveLink) {
+      const liveLink = document.createElement('a');
+      liveLink.href = p.liveLink;
+      liveLink.target = '_blank';
+      liveLink.rel = 'noopener noreferrer';
+      liveLink.textContent = 'Live Demo';
+      actions.appendChild(liveLink);
+    }
+    
+    if (p.sourceLink) {
+      const sourceLink = document.createElement('a');
+      sourceLink.href = p.sourceLink;
+      sourceLink.target = '_blank';
+      sourceLink.rel = 'noopener noreferrer';
+      sourceLink.textContent = 'Source Code';
+      actions.appendChild(sourceLink);
+    }
+    
+    if (p.liveLink || p.sourceLink) {
+      card.appendChild(actions);
+    }
     
     list.appendChild(card);
   });
