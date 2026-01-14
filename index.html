@@ -73,47 +73,50 @@
 </head>
 
 <body>
+    <!-- Skip to main content link for accessibility -->
+    <a href="#home" class="skip-to-content">Skip to main content</a>
+    
     <!--=============== HEADER ===============-->
     <header class="header" id="header">
-        <nav class="nav container">
-            <a href="#" class="nav__logo">معاویہ『AM』</a>
+        <nav class="nav container" aria-label="Main navigation">
+            <a href="#" class="nav__logo" aria-label="Home">معاویہ『AM』</a>
 
             <div class="nav__menu">
                 <ul class="nav__list">
                     <li class="nav__item ">
-                        <a href="#home" class="nav__link">
-                            <i class='bx bx-home'></i>
+                        <a href="#home" class="nav__link" aria-label="Navigate to Home section">
+                            <i class='bx bx-home' aria-hidden="true"></i>
                         </a>
                     </li>
 
                     <li class="nav__item ">
-                        <a href="#about" class="nav__link">
-                            <i class='bx bx-user'></i>
+                        <a href="#about" class="nav__link" aria-label="Navigate to About section">
+                            <i class='bx bx-user' aria-hidden="true"></i>
                         </a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="#skills" class="nav__link">
-                            <i class='bx bx-book'></i>
+                        <a href="#skills" class="nav__link" aria-label="Navigate to Skills section">
+                            <i class='bx bx-book' aria-hidden="true"></i>
                         </a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="#work" class="nav__link">
-                            <i class='bx bx-briefcase-alt-2'></i>
+                        <a href="#work" class="nav__link" aria-label="Navigate to Work section">
+                            <i class='bx bx-briefcase-alt-2' aria-hidden="true"></i>
                         </a>
                     </li>
 
                     <li class="nav__item">
-                        <a href="#contact" class="nav__link">
-                            <i class='bx bx-message-square-dots'></i>
+                        <a href="#contact" class="nav__link" aria-label="Navigate to Contact section">
+                            <i class='bx bx-message-square-dots' aria-hidden="true"></i>
                         </a>
                     </li>
                 </ul>
             </div>
 
             <!--=============== theme change button ===============-->
-            <i class='bx bx-moon change-theme change-theme-button' id="theme-button"></i>
+            <i class='bx bx-moon change-theme change-theme-button' id="theme-button" role="button" aria-label="Toggle dark/light theme" tabindex="0"></i>
 
         </nav>
     </header>
@@ -141,7 +144,7 @@
                 </div>
 
                 <div class="home__handle">
-                    <img src="assets/img/perfil.png" alt="" class="home__img">
+                    <img src="assets/img/perfil.png" alt="Maviya Attar Profile" class="home__img">
                 </div>
 
                 <div class="home__social">
@@ -168,7 +171,7 @@
             <h2 class="section__title">About Me</h2>
 
             <div class="about__container container grid">
-                <img src="assets/img/about.jpg" alt="" class="about__img">
+                <img src="assets/img/about.jpg" alt="About Maviya Attar" class="about__img">
 
                 <div class="about__data">
                     <div class="about__info">
@@ -631,7 +634,7 @@
 
             <div class="work__container container grid">
                 <div class="work__card mix web">
-                    <img src="assets/img/static.jpg" alt="" class="work__img">
+                    <img src="assets/img/static.jpg" alt="Static Websites" class="work__img">
 
                     <h3 class="work__title">Static websites</h3>
 
@@ -641,41 +644,41 @@
                 </div>
 
                 <div class="work__card mix movil">
-                    <img src="assets/img/ai.jpg" alt="" class="work__img">
+                    <img src="assets/img/ai.jpg" alt="AI Projects" class="work__img">
 
                     <h3 class="work__title">Ai</h3>
 
-                    <a href="projects.html class="work__button">
+                    <a href="projects.html" class="work__button">
                         checkout <i class='bx bx-right-arrow work__icon'></i>
                     </a>
                 </div>
 
                 <div class="work__card mix design">
-                    <img src="assets/img/hacking.jpg" alt="" class="work__img">
+                    <img src="assets/img/hacking.jpg" alt="Hacking Projects" class="work__img">
 
                     <h3 class="work__title">Hacking </h3>
 
-                    <a href="projects.html class="work__button">
+                    <a href="projects.html" class="work__button">
                         checkout <i class='bx bx-right-arrow work__icon'></i>
                     </a>
                 </div>
 
                 <div class="work__card mix web">
-                    <img src="assets/img/fullstack.jpg" alt="" class="work__img">
+                    <img src="assets/img/fullstack.jpg" alt="Fullstack Projects" class="work__img">
 
                     <h3 class="work__title">fullstack websites</h3>
 
-                    <a href="projects.html class="work__button">
+                    <a href="projects.html" class="work__button">
                         checkout<i class='bx bx-right-arrow work__icon'></i>
                     </a>
                 </div>
 
                 <div class="work__card mix movil">
-                    <img src="assets/img/automation.jpg" alt="" class="work__img">
+                    <img src="assets/img/automation.jpg" alt="Automation Projects" class="work__img">
 
                     <h3 class="work__title">Automation</h3>
 
-                    <a href="projects.html class="work__button">
+                    <a href="projects.html" class="work__button">
                         checkout <i class='bx bx-right-arrow work__icon'></i>
                     </a>
                 </div>

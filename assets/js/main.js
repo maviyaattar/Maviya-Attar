@@ -133,14 +133,25 @@ if (selectedTheme) {
   );
 }
 
-// Activate / deactivate the theme manually with the button
-themeButton.addEventListener("click", () => {
+// Toggle theme function
+const toggleTheme = () => {
   // Add or remove the light / icon theme
   document.body.classList.toggle(lightTheme);
   themeButton.classList.toggle(iconTheme);
   // We save the theme and the current icon that the user chose
   localStorage.setItem("selected-theme", getCurrentTheme());
   localStorage.setItem("selected-icon", getCurrentIcon());
+};
+
+// Activate / deactivate the theme manually with the button
+themeButton.addEventListener("click", toggleTheme);
+
+// Add keyboard support for theme toggle (Enter or Space key)
+themeButton.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" || e.key === " ") {
+    e.preventDefault();
+    toggleTheme();
+  }
 });
 
 /*=============== SCROLL REVEAL ANIMATION ===============*/
