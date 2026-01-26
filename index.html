@@ -738,7 +738,7 @@
                             <div class="ameer__links">
                                 <h4 class="ameer__links-title">Quick Access</h4>
                                 <div class="ameer__links-grid">
-                                    <a href="assets/pdf/Maviya-Cv.pdf" download class="ameer__link-card" title="Download CV">
+                                    <a href="assets/pdf/Maviya-Cv.pdf" download rel="noopener" class="ameer__link-card" title="Download CV">
                                         <i class='bx bxs-download'></i>
                                         <span>Download CV</span>
                                     </a>
@@ -1070,7 +1070,12 @@ window.addEventListener('load', function() {
             
             // Show bubble after 3 seconds
             setTimeout(() => {
-                if (localStorage.getItem('ameerBubbleDismissed') !== 'true') {
+                try {
+                    if (localStorage.getItem('ameerBubbleDismissed') !== 'true') {
+                        bubble.classList.add('show');
+                    }
+                } catch (e) {
+                    // If localStorage is not available, show bubble by default
                     bubble.classList.add('show');
                 }
             }, 3000);
@@ -1083,7 +1088,11 @@ window.addEventListener('load', function() {
             // Dismiss bubble
             bubbleClose.addEventListener('click', () => {
                 bubble.classList.remove('show');
-                localStorage.setItem('ameerBubbleDismissed', 'true');
+                try {
+                    localStorage.setItem('ameerBubbleDismissed', 'true');
+                } catch (e) {
+                    // Silent fail if localStorage is not available
+                }
             });
 
             // Predefined responses
