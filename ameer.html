@@ -831,6 +831,10 @@ body {
     const typingIndicator = document.getElementById('typingIndicator');
     const sendBtn = document.getElementById('sendBtn');
     const quickStartButtons = document.querySelectorAll('.quick-start-btn');
+    
+    // Constants for timing
+    const MIN_TYPING_DELAY = 1000; // 1 second
+    const MAX_TYPING_DELAY = 2000; // 2 seconds
 
     // Auto-resize textarea
     messageInput.addEventListener('input', function() {
@@ -931,7 +935,8 @@ body {
       simulateTyping();
       
       // Simulate delay for more realistic interaction
-      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+      const typingDelay = MIN_TYPING_DELAY + Math.random() * (MAX_TYPING_DELAY - MIN_TYPING_DELAY);
+      await new Promise(resolve => setTimeout(resolve, typingDelay));
       
       // Get and add AI response
       const response = getAIResponse(message);
