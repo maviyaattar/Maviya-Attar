@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ameer - AI Assistant | Maviya Attar</title>
+
+<!--=============== FAVICON ===============-->
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/animeicon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/img/perfil.png">
+<link rel="icon" type="image/png" sizes="16x16" href="assets/favicons/animeicon.png">
+<link rel="shortcut icon" href="assets/img/perfil.png">
+<meta name="theme-color" content="#a789d4">
+
+<!--=============== GOOGLE FONTS ===============-->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap">
+
+<!--=============== FONT AWESOME ===============-->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<!--=============== BOXICONS ===============-->
+<link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+
+<style>
+:root{
+  --primary: hsl(250, 66%, 75%);
+  --primary-dark: hsl(250, 66%, 65%);
+  --primary-light: hsl(250, 66%, 85%);
+  --bg: hsl(219, 48%, 8%);
+  --bg-alt: hsl(219, 48%, 10%);
+  --card: hsl(219, 32%, 12%);
+  --card-hover: hsl(219, 32%, 15%);
+  --text: hsl(219, 8%, 75%);
+  --text-light: hsl(219, 4%, 55%);
+  --title: hsl(219, 15%, 95%);
+  --border: hsl(219, 32%, 20%);
+  --shadow: rgba(0, 0, 0, 0.3);
+  --success: #10b981;
+  --user-msg-bg: hsl(250, 66%, 75%);
+  --ai-msg-bg: hsl(219, 32%, 15%);
+}
+
+.light{
+  --bg: hsl(219, 100%, 99%);
+  --bg-alt: hsl(219, 100%, 97%);
+  --card: #f2f3ff;
+  --card-hover: #e8e9f7;
+  --text: hsl(219, 8%, 35%);
+  --text-light: hsl(219, 4%, 55%);
+  --title: hsl(219, 15%, 15%);
+  --border: hsl(219, 32%, 90%);
+  --shadow: rgba(0, 0, 0, 0.1);
+  --user-msg-bg: hsl(250, 66%, 65%);
+  --ai-msg-bg: hsl(219, 32%, 92%);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background 0.3s ease, color 0.3s ease;
+  overflow-x: hidden;
+}
+
+/*=============== HEADER ===============*/
+.header {
+  background: var(--card);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 16px var(--shadow);
+}
+
+.header__content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.home-link {
+  background: var(--card-hover);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.home-link:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.header__logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.header__logo i {
+  font-size: 1.8rem;
+}
+
+.header__actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: var(--card-hover);
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 0.5rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.theme-toggle:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: scale(1.1);
+}
+
+/*=============== MAIN CONTAINER ===============*/
+.main-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 2rem;
+  height: calc(100vh - 80px);
+}
+
+/*=============== SIDEBAR ===============*/
+.sidebar {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 1.5rem;
+  height: fit-content;
+  max-height: calc(100vh - 120px);
+  overflow-y: auto;
+  position: sticky;
+  top: 100px;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+  background: var(--card-hover);
+  border-radius: 10px;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.sidebar__avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: white;
+  box-shadow: 0 4px 12px hsla(250, 66%, 75%, 0.4);
+}
+
+.sidebar__info h3 {
+  color: var(--title);
+  font-size: 1.1rem;
+  margin-bottom: 0.25rem;
+}
+
+.sidebar__status {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--text-light);
+}
+
+.status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--success);
+  box-shadow: 0 0 8px var(--success);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.sidebar__section {
+  margin-bottom: 1.5rem;
+}
+
+.sidebar__section h4 {
+  color: var(--title);
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.quick-start-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.quick-start-btn {
+  background: var(--card-hover);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quick-start-btn i {
+  color: var(--primary);
+  font-size: 1rem;
+}
+
+.quick-start-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateX(4px);
+}
+
+.quick-start-btn:hover i {
+  color: white;
+}
+
+.quick-links {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
+}
+
+.quick-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  padding: 0.75rem;
+  background: var(--card-hover);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.quick-link i {
+  font-size: 1.25rem;
+  color: var(--primary);
+}
+
+.quick-link:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.quick-link:hover i {
+  color: white;
+}
+
+/*=============== CHAT CONTAINER ===============*/
+.chat-container {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 120px);
+  overflow: hidden;
+}
+
+.chat-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--card-hover);
+}
+
+.chat-header h2 {
+  color: var(--title);
+  font-size: 1.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.chat-header p {
+  color: var(--text-light);
+  font-size: 0.85rem;
+}
+
+/*=============== MESSAGES AREA ===============*/
+.messages-container {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: var(--card-hover);
+  border-radius: 10px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background: var(--primary);
+  border-radius: 10px;
+}
+
+.message {
+  display: flex;
+  gap: 1rem;
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.message.user {
+  flex-direction: row-reverse;
+}
+
+.message__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.message.user .message__avatar {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+}
+
+.message.ai .message__avatar {
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+}
+
+.message__content {
+  max-width: 70%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.message__bubble {
+  padding: 1rem 1.25rem;
+  border-radius: 16px;
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+.message.user .message__bubble {
+  background: var(--user-msg-bg);
+  color: white;
+  border-bottom-right-radius: 4px;
+}
+
+.message.ai .message__bubble {
+  background: var(--ai-msg-bg);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+}
+
+.light .message.ai .message__bubble {
+  color: var(--title);
+}
+
+.message__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  padding: 0 0.25rem;
+}
+
+.message.user .message__meta {
+  flex-direction: row-reverse;
+}
+
+.welcome-message {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-light);
+}
+
+.welcome-message i {
+  font-size: 4rem;
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.welcome-message h3 {
+  color: var(--title);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.welcome-message p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+/*=============== TYPING INDICATOR ===============*/
+.typing-indicator {
+  display: none;
+  align-items: center;
+  gap: 1rem;
+}
+
+.typing-indicator.active {
+  display: flex;
+}
+
+.typing-indicator .message__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.typing-dots {
+  background: var(--ai-msg-bg);
+  padding: 1rem 1.5rem;
+  border-radius: 16px;
+  border-bottom-left-radius: 4px;
+  display: flex;
+  gap: 0.4rem;
+}
+
+.typing-dots span {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--text-light);
+  animation: typing 1.4s infinite;
+}
+
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+@keyframes typing {
+  0%, 60%, 100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-10px);
+  }
+}
+
+/*=============== INPUT AREA ===============*/
+.chat-input {
+  padding: 1.25rem 1.5rem;
+  border-top: 1px solid var(--border);
+  background: var(--card-hover);
+}
+
+.input-wrapper {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-end;
+}
+
+.input-field {
+  flex: 1;
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.875rem 1rem;
+  color: var(--text);
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  resize: none;
+  max-height: 120px;
+  min-height: 48px;
+  transition: all 0.3s ease;
+}
+
+.input-field:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px hsla(250, 66%, 75%, 0.1);
+}
+
+.input-field::placeholder {
+  color: var(--text-light);
+}
+
+.send-btn {
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  color: white;
+  border: none;
+  padding: 0.875rem 1.25rem;
+  border-radius: 12px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 48px;
+}
+
+.send-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px hsla(250, 66%, 75%, 0.4);
+}
+
+.send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/*=============== RESPONSIVE ===============*/
+@media screen and (max-width: 968px) {
+  .main-container {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    height: auto;
+  }
+
+  .sidebar {
+    position: static;
+    max-height: none;
+  }
+
+  .chat-container {
+    height: 600px;
+  }
+
+  .message__content {
+    max-width: 85%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .header__content {
+    padding: 0 1rem;
+  }
+
+  .header__logo {
+    font-size: 1.25rem;
+  }
+
+  .main-container {
+    padding: 1rem;
+  }
+
+  .sidebar {
+    padding: 1rem;
+  }
+
+  .quick-links {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .messages-container {
+    padding: 1rem;
+  }
+
+  .message__content {
+    max-width: 90%;
+  }
+
+  .chat-input {
+    padding: 1rem;
+  }
+
+  .input-wrapper {
+    gap: 0.5rem;
+  }
+}
+</style>
+</head>
+
+<body>
+  <!--=============== HEADER ===============-->
+  <header class="header">
+    <div class="header__content">
+      <div class="header__left">
+        <a href="index.html" class="home-link">
+          <i class='bx bx-home'></i>
+          <span>Home</span>
+        </a>
+        <div class="header__logo">
+          <i class='bx bxs-bot'></i>
+          <span>Ameer AI</span>
+        </div>
+      </div>
+      <div class="header__actions">
+        <button class="theme-toggle" id="themeToggle">
+          <i class='bx bx-moon'></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!--=============== MAIN CONTAINER ===============-->
+  <div class="main-container">
+    <!--=============== SIDEBAR ===============-->
+    <aside class="sidebar">
+      <div class="sidebar__header">
+        <div class="sidebar__avatar">
+          <i class='bx bxs-bot'></i>
+        </div>
+        <div class="sidebar__info">
+          <h3>Ameer</h3>
+          <div class="sidebar__status">
+            <span class="status-dot"></span>
+            <span>Online & Ready</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="sidebar__section">
+        <h4>Quick Start</h4>
+        <div class="quick-start-buttons">
+          <button class="quick-start-btn" data-prompt="What projects has Maviya worked on?">
+            <i class='bx bx-briefcase'></i>
+            <span>View Projects</span>
+          </button>
+          <button class="quick-start-btn" data-prompt="What are Maviya's skills?">
+            <i class='bx bx-code-alt'></i>
+            <span>Skills & Tech</span>
+          </button>
+          <button class="quick-start-btn" data-prompt="How can I contact Maviya?">
+            <i class='bx bx-envelope'></i>
+            <span>Contact Info</span>
+          </button>
+          <button class="quick-start-btn" data-prompt="Tell me about Maviya's experience">
+            <i class='bx bx-user'></i>
+            <span>About Maviya</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar__section">
+        <h4>Quick Access</h4>
+        <div class="quick-links">
+          <a href="assets/pdf/Maviya-Cv.pdf" download class="quick-link" title="Download CV">
+            <i class='bx bxs-download'></i>
+            <span>CV</span>
+          </a>
+          <a href="https://github.com/maviyaattar" target="_blank" class="quick-link" title="GitHub">
+            <i class='bx bxl-github'></i>
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/maviya-attar-59b619293" target="_blank" class="quick-link" title="LinkedIn">
+            <i class='bx bxl-linkedin-square'></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="mailto:maviyaattar4@gmail.com" class="quick-link" title="Email">
+            <i class='bx bxs-envelope'></i>
+            <span>Email</span>
+          </a>
+        </div>
+      </div>
+    </aside>
+
+    <!--=============== CHAT CONTAINER ===============-->
+    <main class="chat-container">
+      <div class="chat-header">
+        <h2>Chat with Ameer</h2>
+        <p>Your intelligent AI assistant - Ask me anything about Maviya!</p>
+      </div>
+
+      <div class="messages-container" id="messagesContainer">
+        <div class="welcome-message">
+          <i class='bx bxs-bot'></i>
+          <h3>Welcome! I'm Ameer</h3>
+          <p>Your intelligent AI assistant powered by cutting-edge technology. Ask me anything about Maviya's work, projects, or skills!</p>
+        </div>
+      </div>
+
+      <div class="typing-indicator" id="typingIndicator">
+        <div class="message__avatar">
+          <i class='bx bxs-bot'></i>
+        </div>
+        <div class="typing-dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+
+      <div class="chat-input">
+        <form class="input-wrapper" id="chatForm">
+          <textarea 
+            class="input-field" 
+            id="messageInput" 
+            placeholder="Type your message here..." 
+            rows="1"
+            required
+          ></textarea>
+          <button type="submit" class="send-btn" id="sendBtn">
+            <i class='bx bxs-send'></i>
+          </button>
+        </form>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // Check for saved theme preference
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') {
+      body.classList.add('light');
+      themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
+    }
+
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('light');
+      const theme = body.classList.contains('light') ? 'light' : 'dark';
+      localStorage.setItem('theme', theme);
+      themeToggle.innerHTML = theme === 'light' 
+        ? '<i class="bx bx-sun"></i>' 
+        : '<i class="bx bx-moon"></i>';
+    });
+
+    // Chat Functionality
+    const chatForm = document.getElementById('chatForm');
+    const messageInput = document.getElementById('messageInput');
+    const messagesContainer = document.getElementById('messagesContainer');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const sendBtn = document.getElementById('sendBtn');
+    const quickStartButtons = document.querySelectorAll('.quick-start-btn');
+
+    // Auto-resize textarea
+    messageInput.addEventListener('input', function() {
+      this.style.height = 'auto';
+      this.style.height = Math.min(this.scrollHeight, 120) + 'px';
+    });
+
+    // Predefined responses
+    const responses = {
+      projects: "Maviya has worked on various exciting projects including:\n\n• Static websites with modern UI/UX design\n• Automation systems using JavaScript\n• AI-based tools and integrations\n• Security concepts and implementations\n• Full-stack web applications\n\nCheck out the Work section on the main page to see live demos and detailed information about each project!",
+      skills: "Maviya is skilled in:\n\n• Frontend Development: HTML5, CSS3, JavaScript, React\n• UI/UX Design: Modern and responsive interfaces\n• Automation: JavaScript automation tools & scripts\n• AI & Tools: AI APIs, automation workflows\n• Version Control: Git & GitHub\n• Backend: Node.js, Express, databases\n\nHe's currently pursuing a Diploma in Computer Engineering and constantly learning new technologies.",
+      contact: "You can reach Maviya through:\n\n• Email: maviyaattar4@gmail.com\n• WhatsApp: +91 8485089678\n• LinkedIn: linkedin.com/in/maviya-attar-59b619293\n• GitHub: github.com/maviyaattar\n\nFeel free to connect for collaborations, projects, or any inquiries!",
+      experience: "Maviya Attar is a passionate developer and technology enthusiast:\n\n• Diploma in Computer Engineering student\n• Full Stack Developer with modern tech stack\n• Automation Engineer creating efficient solutions\n• AI Explorer integrating cutting-edge technologies\n• Ethical Hacker understanding security concepts\n\nHe combines creativity with technical expertise to build innovative solutions.",
+      default: "I'm here to help! I can tell you about:\n\n• Maviya's projects and portfolio\n• Skills and technical expertise\n• Experience and education\n• Contact information\n• Career goals and interests\n\nFeel free to ask me anything!"
+    };
+
+    function getAIResponse(query) {
+      const lowerQuery = query.toLowerCase();
+      
+      if (lowerQuery.includes('project') || lowerQuery.includes('work') || lowerQuery.includes('portfolio')) {
+        return responses.projects;
+      } else if (lowerQuery.includes('skill') || lowerQuery.includes('technology') || lowerQuery.includes('tech') || lowerQuery.includes('stack')) {
+        return responses.skills;
+      } else if (lowerQuery.includes('contact') || lowerQuery.includes('reach') || lowerQuery.includes('email') || lowerQuery.includes('phone') || lowerQuery.includes('connect')) {
+        return responses.contact;
+      } else if (lowerQuery.includes('experience') || lowerQuery.includes('about') || lowerQuery.includes('background') || lowerQuery.includes('education')) {
+        return responses.experience;
+      }
+      
+      return responses.default;
+    }
+
+    function getCurrentTime() {
+      const now = new Date();
+      return now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    function addMessage(text, isUser = false) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${isUser ? 'user' : 'ai'}`;
+      
+      const avatar = document.createElement('div');
+      avatar.className = 'message__avatar';
+      avatar.innerHTML = isUser ? '<i class="bx bx-user"></i>' : '<i class="bx bxs-bot"></i>';
+      
+      const content = document.createElement('div');
+      content.className = 'message__content';
+      
+      const bubble = document.createElement('div');
+      bubble.className = 'message__bubble';
+      bubble.textContent = text;
+      bubble.style.whiteSpace = 'pre-line';
+      
+      const meta = document.createElement('div');
+      meta.className = 'message__meta';
+      meta.innerHTML = `<span>${isUser ? 'You' : 'Ameer'}</span> • <span>${getCurrentTime()}</span>`;
+      
+      content.appendChild(bubble);
+      content.appendChild(meta);
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(content);
+      
+      // Remove welcome message if it exists
+      const welcomeMsg = messagesContainer.querySelector('.welcome-message');
+      if (welcomeMsg) {
+        welcomeMsg.remove();
+      }
+      
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function simulateTyping() {
+      typingIndicator.classList.add('active');
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+
+    function stopTyping() {
+      typingIndicator.classList.remove('active');
+    }
+
+    async function handleSubmit(e) {
+      e.preventDefault();
+      
+      const message = messageInput.value.trim();
+      if (!message) return;
+      
+      // Disable input
+      sendBtn.disabled = true;
+      messageInput.disabled = true;
+      
+      // Add user message
+      addMessage(message, true);
+      messageInput.value = '';
+      messageInput.style.height = 'auto';
+      
+      // Simulate AI thinking
+      simulateTyping();
+      
+      // Simulate delay for more realistic interaction
+      await new Promise(resolve => setTimeout(resolve, 1000 + Math.random() * 1000));
+      
+      // Get and add AI response
+      const response = getAIResponse(message);
+      stopTyping();
+      addMessage(response, false);
+      
+      // Re-enable input
+      sendBtn.disabled = false;
+      messageInput.disabled = false;
+      messageInput.focus();
+    }
+
+    // Quick Start buttons
+    quickStartButtons.forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const prompt = btn.getAttribute('data-prompt');
+        messageInput.value = prompt;
+        chatForm.dispatchEvent(new Event('submit'));
+      });
+    });
+
+    // Form submission
+    chatForm.addEventListener('submit', handleSubmit);
+
+    // Enter key to send (Shift+Enter for new line)
+    messageInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        chatForm.dispatchEvent(new Event('submit'));
+      }
+    });
+  </script>
+</body>
+</html>

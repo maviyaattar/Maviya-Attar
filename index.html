@@ -115,7 +115,7 @@
                     </li>
 
                     <li class="nav__item">
-                        <a href="#ameer" class="nav__link" title="AI Agent">
+                        <a href="ameer.html" class="nav__link" title="AI Agent">
                             <i class='bx bx-bot'></i>
                         </a>
                     </li>
@@ -706,98 +706,6 @@
             </div>
         </section>
 
-        <!--=============== AMEER - AI AGENT ===============-->
-        <section class="ameer section" id="ameer">
-            <span class="section__subtitle">Interactive AI</span>
-            <h2 class="section__title">Meet Ameer</h2>
-
-            <div class="ameer__container container">
-                <div class="ameer__content">
-                    <!-- AI Agent Card -->
-                    <div class="ameer__card">
-                        <div class="ameer__card-header">
-                            <div class="ameer__avatar">
-                                <i class='bx bxs-bot'></i>
-                            </div>
-                            <div class="ameer__info">
-                                <h3 class="ameer__name">Ameer</h3>
-                                <span class="ameer__status">
-                                    <span class="ameer__status-dot"></span>
-                                    Online & Ready
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="ameer__card-body">
-                            <p class="ameer__description">
-                                Your intelligent AI assistant powered by cutting-edge technology. 
-                                Ask me anything about Maviya's work, projects, or skills!
-                            </p>
-
-                            <!-- Quick Links -->
-                            <div class="ameer__links">
-                                <h4 class="ameer__links-title">Quick Access</h4>
-                                <div class="ameer__links-grid">
-                                    <a href="assets/pdf/Maviya-Cv.pdf" download rel="noopener" class="ameer__link-card" title="Download CV">
-                                        <i class='bx bxs-download'></i>
-                                        <span>Download CV</span>
-                                    </a>
-                                    <a href="https://github.com/maviyaattar" target="_blank" class="ameer__link-card" title="GitHub">
-                                        <i class='bx bxl-github'></i>
-                                        <span>GitHub</span>
-                                    </a>
-                                    <a href="https://www.linkedin.com/in/maviya-attar-59b619293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" class="ameer__link-card" title="LinkedIn">
-                                        <i class='bx bxl-linkedin-square'></i>
-                                        <span>LinkedIn</span>
-                                    </a>
-                                    <a href="mailto:maviyaattar4@gmail.com" class="ameer__link-card" title="Email">
-                                        <i class='bx bxs-envelope'></i>
-                                        <span>Email</span>
-                                    </a>
-                                </div>
-                            </div>
-
-                            <!-- AI Query Interface -->
-                            <div class="ameer__query">
-                                <h4 class="ameer__query-title">Ask Me Anything</h4>
-                                <form class="ameer__query-form" id="ameerQueryForm">
-                                    <div class="ameer__input-wrapper">
-                                        <input 
-                                            type="text" 
-                                            class="ameer__input" 
-                                            id="ameerInput"
-                                            placeholder="Type your question here..."
-                                            autocomplete="off"
-                                            required
-                                        />
-                                        <button type="submit" class="ameer__submit-btn" title="Send Query">
-                                            <i class='bx bxs-send'></i>
-                                        </button>
-                                    </div>
-                                    <div class="ameer__suggestions">
-                                        <span class="ameer__suggestion-label">Try asking:</span>
-                                        <button type="button" class="ameer__suggestion" data-query="What projects has Maviya worked on?">Projects</button>
-                                        <button type="button" class="ameer__suggestion" data-query="What are Maviya's skills?">Skills</button>
-                                        <button type="button" class="ameer__suggestion" data-query="How can I contact Maviya?">Contact</button>
-                                    </div>
-                                </form>
-                                
-                                <!-- Response Area -->
-                                <div class="ameer__response" id="ameerResponse" style="display: none;">
-                                    <div class="ameer__response-header">
-                                        <i class='bx bxs-bot'></i>
-                                        <span>Ameer's Response</span>
-                                    </div>
-                                    <div class="ameer__response-content" id="ameerResponseContent">
-                                        <!-- Response will be inserted here -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         
 
@@ -1055,14 +963,8 @@ window.addEventListener('load', function() {
     </div>
 
     <script>
-        // Ameer AI Agent Functionality
+        // Ameer AI Agent Functionality - Floating Bubble
         (function() {
-            const ameerForm = document.getElementById('ameerQueryForm');
-            const ameerInput = document.getElementById('ameerInput');
-            const ameerResponse = document.getElementById('ameerResponse');
-            const ameerResponseContent = document.getElementById('ameerResponseContent');
-            const suggestions = document.querySelectorAll('.ameer__suggestion');
-            
             // Floating bubble functionality
             const bubble = document.getElementById('ameerBubble');
             const bubbleBtn = document.getElementById('ameerBubbleBtn');
@@ -1080,9 +982,9 @@ window.addEventListener('load', function() {
                 }
             }, 3000);
             
-            // Bubble click - scroll to Ameer section
+            // Bubble click - navigate to Ameer page
             bubbleBtn.addEventListener('click', () => {
-                document.getElementById('ameer').scrollIntoView({ behavior: 'smooth' });
+                window.location.href = 'ameer.html';
             });
             
             // Dismiss bubble
@@ -1093,53 +995,6 @@ window.addEventListener('load', function() {
                 } catch (e) {
                     // Silent fail if localStorage is not available
                 }
-            });
-
-            // Predefined responses
-            const responses = {
-                projects: "Maviya has worked on various exciting projects including static websites, automation systems, AI-based tools, and security concepts. Check out the Work section above to see live demos and detailed information about each project!",
-                skills: "Maviya is skilled in Frontend Development (HTML5, CSS3, JavaScript), UI/UX Design, Automation (JavaScript automation tools & scripts), AI & Tools (AI APIs, automation workflows), and Version Control (Git & GitHub). He's currently pursuing a Diploma in Computer Engineering.",
-                contact: "You can reach Maviya through Email, WhatsApp, or LinkedIn. Use the quick access links above or visit the Contact section below for more details!",
-                default: "I'm here to help! I can tell you about Maviya's projects, skills, experience, and how to get in touch. Feel free to ask me anything!"
-            };
-
-            // Handle form submission
-            ameerForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const query = ameerInput.value.trim().toLowerCase();
-                
-                if (query) {
-                    let response = responses.default;
-                    
-                    if (query.includes('project') || query.includes('work')) {
-                        response = responses.projects;
-                    } else if (query.includes('skill') || query.includes('technology') || query.includes('tech')) {
-                        response = responses.skills;
-                    } else if (query.includes('contact') || query.includes('reach') || query.includes('email') || query.includes('phone')) {
-                        response = responses.contact;
-                    }
-                    
-                    // Show response with animation
-                    ameerResponseContent.textContent = response;
-                    ameerResponse.style.display = 'block';
-                    
-                    // Scroll to response
-                    setTimeout(() => {
-                        ameerResponse.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                    }, 100);
-                    
-                    // Clear input
-                    ameerInput.value = '';
-                }
-            });
-
-            // Handle suggestion clicks
-            suggestions.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const query = btn.getAttribute('data-query');
-                    ameerInput.value = query;
-                    ameerForm.dispatchEvent(new Event('submit'));
-                });
             });
         })();
     </script>
