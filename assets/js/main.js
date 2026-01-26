@@ -270,6 +270,38 @@ sr.reveal(`.contact__form-div`, {
   delay: 200,
 });
 
+// Ameer AI Agent section reveals
+sr.reveal(`.ameer__card`, {
+  origin: "bottom",
+  distance: "60px",
+  scale: 0.9,
+  duration: 1000,
+});
+
+sr.reveal(`.ameer__card-header`, {
+  origin: "top",
+  distance: "30px",
+  delay: 300,
+});
+
+sr.reveal(`.ameer__description`, {
+  origin: "left",
+  distance: "40px",
+  delay: 400,
+});
+
+sr.reveal(`.ameer__links`, {
+  origin: "bottom",
+  distance: "40px",
+  delay: 500,
+});
+
+sr.reveal(`.ameer__query`, {
+  origin: "bottom",
+  distance: "40px",
+  delay: 600,
+});
+
 // Footer reveal
 sr.reveal(`.footer__container`, {
   origin: "bottom",
