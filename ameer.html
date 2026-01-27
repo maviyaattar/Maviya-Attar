@@ -848,16 +848,21 @@ body {
           // Handle action type responses
           const actionValue = data.value;
           
-          // Check if it's a URL (only allow http/https)
-          if (actionValue.startsWith('http://') || actionValue.startsWith('https://')) {
-            window.open(actionValue, '_blank');
-          } else {
-            // Check for predefined action handlers
+          // Check if it's a URL (only allow http/https with proper validation)
+          try {
+            const url = new URL(actionValue);
+            if (url.protocol === 'http:' || url.protocol === 'https:') {
+              window.open(actionValue, '_blank');
+            } else {
+              console.warn('Invalid URL protocol:', url.protocol);
+            }
+          } catch (e) {
+            // Not a valid URL, check for predefined action handlers
             const handler = actionHandlers[actionValue];
             if (handler) {
               handler();
             } else {
-              console.warn('Unknown action received:', actionValue);
+              console.warn('Unknown action type:', typeof actionValue);
             }
           }
         } else if (data.type === 'text') {
