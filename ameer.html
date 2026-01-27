@@ -671,43 +671,48 @@ body {
     const MIN_TYPING_DELAY = 1000; // 1 second
     const MAX_TYPING_DELAY = 2000; // 2 seconds
 
+    // Theme switching helper functions
+    function switchToDarkMode() {
+      if (!body.classList.contains('light')) {
+        return false; // Already in dark mode
+      }
+      body.classList.remove('light');
+      localStorage.setItem('theme', 'dark');
+      themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
+      return true;
+    }
+
+    function switchToLightMode() {
+      if (body.classList.contains('light')) {
+        return false; // Already in light mode
+      }
+      body.classList.add('light');
+      localStorage.setItem('theme', 'light');
+      themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
+      return true;
+    }
+
     // Action handlers
     const actionHandlers = {
       'DARK_MODE': () => {
-        if (!body.classList.contains('light')) {
-          return; // Already in dark mode
+        if (switchToDarkMode()) {
+          addMessage('Dark mode activated ✨', false);
         }
-        body.classList.remove('light');
-        localStorage.setItem('theme', 'dark');
-        themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
-        addMessage('Dark mode activated ✨', false);
       },
       'ACTION_DARK': () => {
-        if (!body.classList.contains('light')) {
-          return; // Already in dark mode
+        if (switchToDarkMode()) {
+          addMessage('Dark mode activated ✨', false);
         }
-        body.classList.remove('light');
-        localStorage.setItem('theme', 'dark');
-        themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
-        addMessage('Dark mode activated ✨', false);
       },
       'LIGHT_MODE': () => {
-        if (body.classList.contains('light')) {
-          return; // Already in light mode
+        if (switchToLightMode()) {
+          addMessage('Light mode activated ☀️', false);
         }
-        body.classList.add('light');
-        localStorage.setItem('theme', 'light');
-        themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
-        addMessage('Light mode activated ☀️', false);
       },
       'ACTION_LIGHT': () => {
-        if (body.classList.contains('light')) {
-          return; // Already in light mode
+        if (switchToLightMode()) {
+          addMessage('Light mode activated ☀️', false);
         }
-        body.classList.add('light');
-        localStorage.setItem('theme', 'light');
-        themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
-        addMessage('Light mode activated ☀️', false);
       },
       'ACTION_CV': () => {
         window.open('assets/pdf/Maviya-Cv.pdf', '_blank');
