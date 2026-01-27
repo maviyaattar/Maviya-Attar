@@ -161,187 +161,27 @@ body {
 
 /*=============== MAIN CONTAINER ===============*/
 .main-container {
-  max-width: 1400px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 2rem 1.5rem;
-  display: grid;
-  grid-template-columns: 300px 1fr;
-  gap: 2rem;
+  padding: 0;
+  display: flex;
   height: calc(100vh - 80px);
 }
 
 /*=============== SIDEBAR ===============*/
 .sidebar {
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
-  padding: 1.5rem;
-  height: fit-content;
-  max-height: calc(100vh - 120px);
-  overflow-y: auto;
-  position: sticky;
-  top: 100px;
-}
-
-.sidebar::-webkit-scrollbar {
-  width: 6px;
-}
-
-.sidebar::-webkit-scrollbar-track {
-  background: var(--card-hover);
-  border-radius: 10px;
-}
-
-.sidebar::-webkit-scrollbar-thumb {
-  background: var(--primary);
-  border-radius: 10px;
-}
-
-.sidebar__header {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border);
-}
-
-.sidebar__avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.5rem;
-  color: white;
-  box-shadow: 0 4px 12px hsla(250, 66%, 75%, 0.4);
-}
-
-.sidebar__info h3 {
-  color: var(--title);
-  font-size: 1.1rem;
-  margin-bottom: 0.25rem;
-}
-
-.sidebar__status {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: 0.85rem;
-  color: var(--text-light);
-}
-
-.status-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: var(--success);
-  box-shadow: 0 0 8px var(--success);
-  animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.5; }
-}
-
-.sidebar__section {
-  margin-bottom: 1.5rem;
-}
-
-.sidebar__section h4 {
-  color: var(--title);
-  font-size: 0.9rem;
-  margin-bottom: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-}
-
-.quick-start-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.quick-start-btn {
-  background: var(--card-hover);
-  border: 1px solid var(--border);
-  color: var(--text);
-  padding: 0.75rem 1rem;
-  border-radius: 8px;
-  font-size: 0.85rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  text-align: left;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.quick-start-btn i {
-  color: var(--primary);
-  font-size: 1rem;
-}
-
-.quick-start-btn:hover {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-  transform: translateX(4px);
-}
-
-.quick-start-btn:hover i {
-  color: white;
-}
-
-.quick-links {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.5rem;
-}
-
-.quick-link {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 0.25rem;
-  padding: 0.75rem;
-  background: var(--card-hover);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  color: var(--text);
-  text-decoration: none;
-  font-size: 0.75rem;
-  transition: all 0.3s ease;
-}
-
-.quick-link i {
-  font-size: 1.25rem;
-  color: var(--primary);
-}
-
-.quick-link:hover {
-  background: var(--primary);
-  color: white;
-  border-color: var(--primary);
-  transform: translateY(-2px);
-}
-
-.quick-link:hover i {
-  color: white;
+  display: none;
 }
 
 /*=============== CHAT CONTAINER ===============*/
 .chat-container {
   background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 16px;
+  border: none;
+  border-radius: 0;
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 120px);
+  height: calc(100vh - 80px);
+  width: 100%;
   overflow: hidden;
 }
 
@@ -473,25 +313,75 @@ body {
 
 .welcome-message {
   text-align: center;
-  padding: 2rem;
+  padding: 3rem 2rem;
   color: var(--text-light);
+  max-width: 600px;
+  margin: auto;
 }
 
 .welcome-message i {
-  font-size: 4rem;
+  font-size: 5rem;
   color: var(--primary);
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
 }
 
 .welcome-message h3 {
   color: var(--title);
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  font-weight: 700;
 }
 
 .welcome-message p {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+
+.welcome-suggestions {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.suggestion-btn {
+  background: var(--card-hover);
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: left;
+  font-size: 0.9rem;
+}
+
+.suggestion-btn i {
+  font-size: 1.5rem;
+  color: var(--primary);
+  flex-shrink: 0;
+}
+
+.suggestion-btn:hover {
+  background: var(--primary);
+  color: white;
+  border-color: var(--primary);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px hsla(250, 66%, 75%, 0.3);
+}
+
+.suggestion-btn:hover i {
+  color: white;
 }
 
 /*=============== TYPING INDICATOR ===============*/
@@ -617,18 +507,11 @@ body {
 /*=============== RESPONSIVE ===============*/
 @media screen and (max-width: 968px) {
   .main-container {
-    grid-template-columns: 1fr;
-    gap: 1rem;
-    height: auto;
-  }
-
-  .sidebar {
-    position: static;
-    max-height: none;
+    height: calc(100vh - 80px);
   }
 
   .chat-container {
-    height: 600px;
+    height: calc(100vh - 80px);
   }
 
   .message__content {
@@ -646,15 +529,7 @@ body {
   }
 
   .main-container {
-    padding: 1rem;
-  }
-
-  .sidebar {
-    padding: 1rem;
-  }
-
-  .quick-links {
-    grid-template-columns: repeat(2, 1fr);
+    padding: 0;
   }
 
   .messages-container {
@@ -700,66 +575,6 @@ body {
 
   <!--=============== MAIN CONTAINER ===============-->
   <div class="main-container">
-    <!--=============== SIDEBAR ===============-->
-    <aside class="sidebar">
-      <div class="sidebar__header">
-        <div class="sidebar__avatar">
-          <i class='bx bxs-bot'></i>
-        </div>
-        <div class="sidebar__info">
-          <h3>Ameer</h3>
-          <div class="sidebar__status">
-            <span class="status-dot"></span>
-            <span>Online & Ready</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="sidebar__section">
-        <h4>Quick Start</h4>
-        <div class="quick-start-buttons">
-          <button class="quick-start-btn" data-prompt="What projects has Maviya worked on?">
-            <i class='bx bx-briefcase'></i>
-            <span>View Projects</span>
-          </button>
-          <button class="quick-start-btn" data-prompt="What are Maviya's skills?">
-            <i class='bx bx-code-alt'></i>
-            <span>Skills & Tech</span>
-          </button>
-          <button class="quick-start-btn" data-prompt="How can I contact Maviya?">
-            <i class='bx bx-envelope'></i>
-            <span>Contact Info</span>
-          </button>
-          <button class="quick-start-btn" data-prompt="Tell me about Maviya's experience">
-            <i class='bx bx-user'></i>
-            <span>About Maviya</span>
-          </button>
-        </div>
-      </div>
-
-      <div class="sidebar__section">
-        <h4>Quick Access</h4>
-        <div class="quick-links">
-          <a href="assets/pdf/Maviya-Cv.pdf" download class="quick-link" title="Download CV">
-            <i class='bx bxs-download'></i>
-            <span>CV</span>
-          </a>
-          <a href="https://github.com/maviyaattar" target="_blank" class="quick-link" title="GitHub">
-            <i class='bx bxl-github'></i>
-            <span>GitHub</span>
-          </a>
-          <a href="https://www.linkedin.com/in/maviya-attar-59b619293" target="_blank" class="quick-link" title="LinkedIn">
-            <i class='bx bxl-linkedin-square'></i>
-            <span>LinkedIn</span>
-          </a>
-          <a href="mailto:maviyaattar4@gmail.com" class="quick-link" title="Email">
-            <i class='bx bxs-envelope'></i>
-            <span>Email</span>
-          </a>
-        </div>
-      </div>
-    </aside>
-
     <!--=============== CHAT CONTAINER ===============-->
     <main class="chat-container">
       <div class="chat-header">
@@ -771,7 +586,25 @@ body {
         <div class="welcome-message">
           <i class='bx bxs-bot'></i>
           <h3>Welcome! I'm Ameer</h3>
-          <p>Your intelligent AI assistant powered by cutting-edge technology. Ask me anything about Maviya's work, projects, or skills!</p>
+          <p>Your intelligent AI assistant powered by cutting-edge technology. Ask me anything about Maviya's work, projects, skills, or try the suggestions below!</p>
+          <div class="welcome-suggestions">
+            <button class="suggestion-btn" data-prompt="What are Maviya's skills?">
+              <i class='bx bx-code-alt'></i>
+              <span>Skills & Tech</span>
+            </button>
+            <button class="suggestion-btn" data-prompt="What projects has Maviya worked on?">
+              <i class='bx bx-briefcase'></i>
+              <span>View Projects</span>
+            </button>
+            <button class="suggestion-btn" data-prompt="How can I contact Maviya?">
+              <i class='bx bx-envelope'></i>
+              <span>Contact Info</span>
+            </button>
+            <button class="suggestion-btn" data-prompt="Show me Maviya's CV">
+              <i class='bx bxs-download'></i>
+              <span>Get CV</span>
+            </button>
+          </div>
         </div>
       </div>
 
@@ -830,7 +663,6 @@ body {
     const messagesContainer = document.getElementById('messagesContainer');
     const typingIndicator = document.getElementById('typingIndicator');
     const sendBtn = document.getElementById('sendBtn');
-    const quickStartButtons = document.querySelectorAll('.quick-start-btn');
     
     // API Configuration
     const AI_API = "https://portfolio-backend-production-66d8.up.railway.app/ai/chat";
@@ -838,6 +670,44 @@ body {
     // Constants for timing
     const MIN_TYPING_DELAY = 1000; // 1 second
     const MAX_TYPING_DELAY = 2000; // 2 seconds
+
+    // Action handlers
+    const actionHandlers = {
+      'DARK_MODE': () => {
+        if (!body.classList.contains('light')) {
+          return; // Already in dark mode
+        }
+        body.classList.remove('light');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<i class="bx bx-moon"></i>';
+        addMessage('Dark mode activated ✨', false);
+      },
+      'LIGHT_MODE': () => {
+        if (body.classList.contains('light')) {
+          return; // Already in light mode
+        }
+        body.classList.add('light');
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
+        addMessage('Light mode activated ☀️', false);
+      },
+      'ACTION_CV': () => {
+        window.open('assets/pdf/Maviya-Cv.pdf', '_blank');
+        addMessage('Opening CV... 📄', false);
+      },
+      'ACTION_GITHUB': () => {
+        window.open('https://github.com/maviyaattar', '_blank');
+        addMessage('Opening GitHub profile... 💻', false);
+      },
+      'ACTION_LINKEDIN': () => {
+        window.open('https://www.linkedin.com/in/maviya-attar-59b619293', '_blank');
+        addMessage('Opening LinkedIn profile... 💼', false);
+      },
+      'ACTION_INSTAGRAM': () => {
+        window.open('https://www.instagram.com/maviyaattar/', '_blank');
+        addMessage('Opening Instagram profile... 📸', false);
+      }
+    };
 
     // Auto-resize textarea
     messageInput.addEventListener('input', function() {
@@ -952,8 +822,24 @@ body {
         const data = await response.json();
         stopTyping();
         
-        // Add AI response from API
-        addMessage(data.response || data.message || data.reply || "I'm processing your request. Please try asking in a different way.", false);
+        // Handle response based on type
+        if (data.type === 'action') {
+          // Handle action type responses
+          const actionValue = data.value;
+          const handler = actionHandlers[actionValue];
+          
+          if (handler) {
+            handler();
+          } else {
+            addMessage(`Action received: ${actionValue}`, false);
+          }
+        } else if (data.type === 'text') {
+          // Handle text type responses
+          addMessage(data.value, false);
+        } else {
+          // Fallback for unexpected formats
+          addMessage(data.response || data.message || data.reply || data.value || "I'm processing your request. Please try asking in a different way.", false);
+        }
         
       } catch (error) {
         console.warn('API unavailable, using fallback responses:', error);
@@ -974,13 +860,22 @@ body {
     }
 
     // Quick Start buttons
-    quickStartButtons.forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const prompt = btn.getAttribute('data-prompt');
-        messageInput.value = prompt;
-        chatForm.dispatchEvent(new Event('submit'));
+    // Removed as sidebar is no longer visible
+    
+    // Add event listeners to suggestion buttons
+    function attachSuggestionListeners() {
+      const suggestionButtons = document.querySelectorAll('.suggestion-btn');
+      suggestionButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const prompt = btn.getAttribute('data-prompt');
+          messageInput.value = prompt;
+          chatForm.dispatchEvent(new Event('submit'));
+        });
       });
-    });
+    }
+    
+    // Attach listeners on load
+    attachSuggestionListeners();
 
     // Form submission
     chatForm.addEventListener('submit', handleSubmit);
