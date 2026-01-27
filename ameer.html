@@ -953,7 +953,7 @@ body {
         stopTyping();
         
         // Add AI response from API
-        addMessage(data.response || data.message || 'I received your message!', false);
+        addMessage(data.response || data.message || data.reply || "I'm processing your request. Please try asking in a different way.", false);
         
       } catch (error) {
         console.warn('API unavailable, using fallback responses:', error);
