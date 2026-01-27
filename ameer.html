@@ -693,40 +693,29 @@ body {
     const MIN_TYPING_DELAY = 1000; // 1 second
     const MAX_TYPING_DELAY = 2000; // 2 seconds
 
-    // Action handler functions
+    // Action handler functions - perform actions silently without messages
     function handleDarkModeAction() {
-      const switched = switchToDarkMode();
-      if (switched) {
-        addMessage('Switching to dark mode ✨', false);
-      }
+      switchToDarkMode();
     }
 
     function handleLightModeAction() {
-      const switched = switchToLightMode();
-      if (switched) {
-        addMessage('Switching to light mode ☀️', false);
-      }
-    }
-
-    function handleUrlAction(url, message) {
-      window.open(url, '_blank');
-      addMessage(message, false);
+      switchToLightMode();
     }
 
     function handleCVAction() {
-      handleUrlAction('assets/pdf/Maviya-Cv.pdf', 'Opening CV... 📄');
+      window.open('assets/pdf/Maviya-Cv.pdf', '_blank');
     }
 
     function handleGitHubAction() {
-      handleUrlAction('https://github.com/maviyaattar', 'Opening GitHub profile... 💻');
+      window.open('https://github.com/maviyaattar', '_blank');
     }
 
     function handleLinkedInAction() {
-      handleUrlAction('https://www.linkedin.com/in/maviya-attar-59b619293', 'Opening LinkedIn profile... 💼');
+      window.open('https://www.linkedin.com/in/maviya-attar-59b619293', '_blank');
     }
 
     function handleInstagramAction() {
-      handleUrlAction('https://www.instagram.com/maviyaattar/', 'Opening Instagram profile... 📸');
+      window.open('https://www.instagram.com/maviyaattar/', '_blank');
     }
 
     // Action handlers map
@@ -858,12 +847,16 @@ body {
         if (data.type === 'action') {
           // Handle action type responses
           const actionValue = data.value;
-          const handler = actionHandlers[actionValue];
           
-          if (handler) {
-            handler();
+          // Check if it's a URL (backend can send direct URLs)
+          if (actionValue.startsWith('http')) {
+            window.open(actionValue, '_blank');
           } else {
-            addMessage("Sorry, I couldn't complete that action. Please try again.", false);
+            // Check for predefined action handlers
+            const handler = actionHandlers[actionValue];
+            if (handler) {
+              handler();
+            }
           }
         } else if (data.type === 'text') {
           // Handle text type responses
