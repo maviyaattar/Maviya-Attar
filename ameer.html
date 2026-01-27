@@ -695,13 +695,17 @@ body {
 
     // Action handler functions
     function handleDarkModeAction() {
-      switchToDarkMode();
-      addMessage('Switching to dark mode ✨', false);
+      const switched = switchToDarkMode();
+      if (switched) {
+        addMessage('Switching to dark mode ✨', false);
+      }
     }
 
     function handleLightModeAction() {
-      switchToLightMode();
-      addMessage('Switching to light mode ☀️', false);
+      const switched = switchToLightMode();
+      if (switched) {
+        addMessage('Switching to light mode ☀️', false);
+      }
     }
 
     function handleUrlAction(url, message) {
