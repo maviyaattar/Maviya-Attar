@@ -695,35 +695,34 @@ body {
 
     // Action handler functions
     function handleDarkModeAction() {
-      if (switchToDarkMode()) {
-        addMessage('Dark mode activated ✨', false);
-      }
+      switchToDarkMode();
+      addMessage('Switching to dark mode ✨', false);
     }
 
     function handleLightModeAction() {
-      if (switchToLightMode()) {
-        addMessage('Light mode activated ☀️', false);
-      }
+      switchToLightMode();
+      addMessage('Switching to light mode ☀️', false);
+    }
+
+    function handleUrlAction(url, message) {
+      window.open(url, '_blank');
+      addMessage(message, false);
     }
 
     function handleCVAction() {
-      window.open('assets/pdf/Maviya-Cv.pdf', '_blank');
-      addMessage('Opening CV... 📄', false);
+      handleUrlAction('assets/pdf/Maviya-Cv.pdf', 'Opening CV... 📄');
     }
 
     function handleGitHubAction() {
-      window.open('https://github.com/maviyaattar', '_blank');
-      addMessage('Opening GitHub profile... 💻', false);
+      handleUrlAction('https://github.com/maviyaattar', 'Opening GitHub profile... 💻');
     }
 
     function handleLinkedInAction() {
-      window.open('https://www.linkedin.com/in/maviya-attar-59b619293', '_blank');
-      addMessage('Opening LinkedIn profile... 💼', false);
+      handleUrlAction('https://www.linkedin.com/in/maviya-attar-59b619293', 'Opening LinkedIn profile... 💼');
     }
 
     function handleInstagramAction() {
-      window.open('https://www.instagram.com/maviyaattar/', '_blank');
-      addMessage('Opening Instagram profile... 📸', false);
+      handleUrlAction('https://www.instagram.com/maviyaattar/', 'Opening Instagram profile... 📸');
     }
 
     // Action handlers map
@@ -860,7 +859,7 @@ body {
           if (handler) {
             handler();
           } else {
-            addMessage(`Action received: ${actionValue}`, false);
+            addMessage("Sorry, I couldn't complete that action. Please try again.", false);
           }
         } else if (data.type === 'text') {
           // Handle text type responses
