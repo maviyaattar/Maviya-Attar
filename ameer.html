@@ -641,36 +641,6 @@ body {
     const themeToggle = document.getElementById('themeToggle');
     const body = document.body;
     
-    // Check for saved theme preference
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    if (currentTheme === 'light') {
-      body.classList.add('light');
-      themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
-    }
-
-    themeToggle.addEventListener('click', () => {
-      body.classList.toggle('light');
-      const theme = body.classList.contains('light') ? 'light' : 'dark';
-      localStorage.setItem('theme', theme);
-      themeToggle.innerHTML = theme === 'light' 
-        ? '<i class="bx bx-sun"></i>' 
-        : '<i class="bx bx-moon"></i>';
-    });
-
-    // Chat Functionality
-    const chatForm = document.getElementById('chatForm');
-    const messageInput = document.getElementById('messageInput');
-    const messagesContainer = document.getElementById('messagesContainer');
-    const typingIndicator = document.getElementById('typingIndicator');
-    const sendBtn = document.getElementById('sendBtn');
-    
-    // API Configuration
-    const AI_API = "https://portfolio-backend-production-66d8.up.railway.app/ai/chat";
-    
-    // Constants for timing
-    const MIN_TYPING_DELAY = 1000; // 1 second
-    const MAX_TYPING_DELAY = 2000; // 2 seconds
-
     // Theme switching helper functions
     function switchToDarkMode() {
       if (!body.classList.contains('light')) {
@@ -692,44 +662,80 @@ body {
       return true;
     }
 
-    // Action handlers
-    const actionHandlers = {
-      'DARK_MODE': () => {
-        if (switchToDarkMode()) {
-          addMessage('Dark mode activated ✨', false);
-        }
-      },
-      'ACTION_DARK': () => {
-        if (switchToDarkMode()) {
-          addMessage('Dark mode activated ✨', false);
-        }
-      },
-      'LIGHT_MODE': () => {
-        if (switchToLightMode()) {
-          addMessage('Light mode activated ☀️', false);
-        }
-      },
-      'ACTION_LIGHT': () => {
-        if (switchToLightMode()) {
-          addMessage('Light mode activated ☀️', false);
-        }
-      },
-      'ACTION_CV': () => {
-        window.open('assets/pdf/Maviya-Cv.pdf', '_blank');
-        addMessage('Opening CV... 📄', false);
-      },
-      'ACTION_GITHUB': () => {
-        window.open('https://github.com/maviyaattar', '_blank');
-        addMessage('Opening GitHub profile... 💻', false);
-      },
-      'ACTION_LINKEDIN': () => {
-        window.open('https://www.linkedin.com/in/maviya-attar-59b619293', '_blank');
-        addMessage('Opening LinkedIn profile... 💼', false);
-      },
-      'ACTION_INSTAGRAM': () => {
-        window.open('https://www.instagram.com/maviyaattar/', '_blank');
-        addMessage('Opening Instagram profile... 📸', false);
+    function toggleTheme() {
+      if (body.classList.contains('light')) {
+        switchToDarkMode();
+      } else {
+        switchToLightMode();
       }
+    }
+    
+    // Check for saved theme preference
+    const currentTheme = localStorage.getItem('theme') || 'dark';
+    if (currentTheme === 'light') {
+      body.classList.add('light');
+      themeToggle.innerHTML = '<i class="bx bx-sun"></i>';
+    }
+
+    themeToggle.addEventListener('click', toggleTheme);
+
+    // Chat Functionality
+    const chatForm = document.getElementById('chatForm');
+    const messageInput = document.getElementById('messageInput');
+    const messagesContainer = document.getElementById('messagesContainer');
+    const typingIndicator = document.getElementById('typingIndicator');
+    const sendBtn = document.getElementById('sendBtn');
+    
+    // API Configuration
+    const AI_API = "https://portfolio-backend-production-66d8.up.railway.app/ai/chat";
+    
+    // Constants for timing
+    const MIN_TYPING_DELAY = 1000; // 1 second
+    const MAX_TYPING_DELAY = 2000; // 2 seconds
+
+    // Action handler functions
+    function handleDarkModeAction() {
+      if (switchToDarkMode()) {
+        addMessage('Dark mode activated ✨', false);
+      }
+    }
+
+    function handleLightModeAction() {
+      if (switchToLightMode()) {
+        addMessage('Light mode activated ☀️', false);
+      }
+    }
+
+    function handleCVAction() {
+      window.open('assets/pdf/Maviya-Cv.pdf', '_blank');
+      addMessage('Opening CV... 📄', false);
+    }
+
+    function handleGitHubAction() {
+      window.open('https://github.com/maviyaattar', '_blank');
+      addMessage('Opening GitHub profile... 💻', false);
+    }
+
+    function handleLinkedInAction() {
+      window.open('https://www.linkedin.com/in/maviya-attar-59b619293', '_blank');
+      addMessage('Opening LinkedIn profile... 💼', false);
+    }
+
+    function handleInstagramAction() {
+      window.open('https://www.instagram.com/maviyaattar/', '_blank');
+      addMessage('Opening Instagram profile... 📸', false);
+    }
+
+    // Action handlers map
+    const actionHandlers = {
+      'DARK_MODE': handleDarkModeAction,
+      'ACTION_DARK': handleDarkModeAction,
+      'LIGHT_MODE': handleLightModeAction,
+      'ACTION_LIGHT': handleLightModeAction,
+      'ACTION_CV': handleCVAction,
+      'ACTION_GITHUB': handleGitHubAction,
+      'ACTION_LINKEDIN': handleLinkedInAction,
+      'ACTION_INSTAGRAM': handleInstagramAction
     };
 
     // Auto-resize textarea
