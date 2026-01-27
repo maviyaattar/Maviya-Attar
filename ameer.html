@@ -848,14 +848,16 @@ body {
           // Handle action type responses
           const actionValue = data.value;
           
-          // Check if it's a URL (backend can send direct URLs)
-          if (actionValue.startsWith('http')) {
+          // Check if it's a URL (only allow http/https)
+          if (actionValue.startsWith('http://') || actionValue.startsWith('https://')) {
             window.open(actionValue, '_blank');
           } else {
             // Check for predefined action handlers
             const handler = actionHandlers[actionValue];
             if (handler) {
               handler();
+            } else {
+              console.warn('Unknown action received:', actionValue);
             }
           }
         } else if (data.type === 'text') {
