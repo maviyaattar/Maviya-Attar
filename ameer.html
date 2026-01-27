@@ -695,29 +695,33 @@ body {
 
     // Action handler functions - perform actions silently without messages
     function handleDarkModeAction() {
-      switchToDarkMode();
-    }
+  switchToDarkMode();
+}
 
-    function handleLightModeAction() {
-      switchToLightMode();
-    }
+function handleLightModeAction() {
+  switchToLightMode();
+}
 
-    function handleCVAction() {
-      window.open('assets/pdf/Maviya-Cv.pdf', '_blank');
-    }
+function handleCVAction() {
+  const link = document.createElement('a');
+  link.href = 'assets/pdf/Maviya-Cv.pdf';
+  link.download = 'Maviya-Attar-CV.pdf';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
-    function handleGitHubAction() {
-      window.open('https://github.com/maviyaattar', '_blank');
-    }
+function handleGitHubAction() {
+  window.open('https://github.com/Maviyaattar', '_blank');
+}
 
-    function handleLinkedInAction() {
-      window.open('https://www.linkedin.com/in/maviya-attar-59b619293', '_blank');
-    }
+function handleLinkedInAction() {
+  window.open('https://www.linkedin.com/in/maviya-attar-59b619293?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app', '_blank');
+}
 
-    function handleInstagramAction() {
-      window.open('https://www.instagram.com/maviyaattar/', '_blank');
+function handleInstagramAction() {
+  window.open('https://www.instagram.com/maviya_706/', '_blank');
     }
-
     // Action handlers map
     const actionHandlers = {
       'DARK_MODE': handleDarkModeAction,
