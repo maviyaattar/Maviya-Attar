@@ -4,24 +4,24 @@
 
     <!-- Homepage -->
     <url>
-        <loc>https://maviyaattar.vercel.app/</loc>
-        <lastmod>2026-06-11</lastmod>
+        <loc>https://maviyaattar.dev/</loc>
+        <lastmod>2026-08-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>1.0</priority>
     </url>
 
     <!-- Projects Page -->
     <url>
-        <loc>https://maviyaattar.vercel.app/projects.html</loc>
-        <lastmod>2026-06-11</lastmod>
+        <loc>https://maviyaattar.dev/projects.html</loc>
+        <lastmod>2026-08-15</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.9</priority>
     </url>
 
     <!-- Ameer AI Assistant -->
     <url>
-        <loc>https://maviyaattar.vercel.app/ameer.html</loc>
-        <lastmod>2026-06-11</lastmod>
+        <loc>https://maviyaattar.dev/ameer.html</loc>
+        <lastmod>2026-08-15</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
