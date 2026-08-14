@@ -4,7 +4,7 @@
 Welcome to my personal developer portfolio website.  
 This portfolio showcases my skills, projects, and experience in **Web Development, Automation, AI, and Cybersecurity**.
 
-🌐 **Live Website:** https://maviya.me  
+🌐 **Live Website:** https://maviyaattar.dev
 
 ---
 
