@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ameer - AI Assistant | Maviya Attar</title>
+<meta name="description" content="Ameer AI Assistant by Maviya Attar, Software Engineer in Solapur and Founder of Attar Technologies Solapur. Ask about projects, skills, and contact details.">
+<meta name="keywords" content="Maviya Attar, Software Engineer in Solapur, Attar Technologies Solapur, Ameer AI Assistant, Web Developer, Full Stack Developer">
+<meta name="author" content="Maviya Attar">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://maviyaattar.dev/ameer.html">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Ameer - AI Assistant | Maviya Attar">
+<meta property="og:description" content="Chat with Ameer AI Assistant by Maviya Attar, Software Engineer in Solapur and Founder of Attar Technologies Solapur.">
+<meta property="og:url" content="https://maviyaattar.dev/ameer.html">
+<meta property="og:site_name" content="Maviya Attar Portfolio">
+<meta property="og:image" content="https://maviyaattar.dev/assets/img/perfil.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Ameer - AI Assistant | Maviya Attar">
+<meta name="twitter:description" content="Ameer AI Assistant for Maviya Attar, Software Engineer in Solapur.">
+<meta name="twitter:image" content="https://maviyaattar.dev/assets/img/perfil.png">
 
 <!--=============== FAVICON ===============-->
 <link rel="apple-touch-icon" sizes="180x180" href="assets/favicons/animeicon.png">
@@ -549,6 +564,25 @@ body {
   }
 }
 </style>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Maviya Attar",
+  "url": "https://maviyaattar.dev/",
+  "jobTitle": "Software Engineer",
+  "description": "Software Engineer in Solapur and Founder of Attar Technologies Solapur.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Attar Technologies Solapur"
+  },
+  "sameAs": [
+    "https://github.com/maviyaattar",
+    "https://www.linkedin.com/in/maviya-attar-59b619293",
+    "https://www.instagram.com/maviya_706/"
+  ]
+}
+</script>
 </head>
 
 <body>
@@ -579,7 +613,7 @@ body {
     <main class="chat-container">
       <div class="chat-header">
         <h2>Chat with Ameer</h2>
-        <p>Your intelligent AI assistant - Ask me anything about Maviya!</p>
+        <p>Your intelligent AI assistant — Ask me anything about Maviya Attar, Software Engineer in Solapur and Founder of Attar Technologies Solapur.</p>
       </div>
 
       <div class="messages-container" id="messagesContainer">
@@ -742,11 +776,11 @@ function handleInstagramAction() {
 
     // Predefined responses
     const responses = {
-      projects: "Maviya has worked on various exciting projects including:\n\n• Static websites with modern UI/UX design\n• Automation systems using JavaScript\n• AI-based tools and integrations\n• Security concepts and implementations\n• Full-stack web applications\n\nCheck out the Work section on the main page to see live demos and detailed information about each project!",
-      skills: "Maviya is skilled in:\n\n• Frontend Development: HTML5, CSS3, JavaScript, React\n• UI/UX Design: Modern and responsive interfaces\n• Automation: JavaScript automation tools & scripts\n• AI & Tools: AI APIs, automation workflows\n• Version Control: Git & GitHub\n• Backend: Node.js, Express, databases\n\nHe's currently pursuing a Diploma in Computer Engineering and constantly learning new technologies.",
-      contact: "You can reach Maviya through:\n\n• Email: maviyaattar4@gmail.com\n• WhatsApp: +91 8485089678\n• LinkedIn: linkedin.com/in/maviya-attar-59b619293\n• GitHub: github.com/maviyaattar\n\nFeel free to connect for collaborations, projects, or any inquiries!",
-      experience: "Maviya Attar is a passionate developer and technology enthusiast:\n\n• Diploma in Computer Engineering student\n• Full Stack Developer with modern tech stack\n• Automation Engineer creating efficient solutions\n• AI Explorer integrating cutting-edge technologies\n• Ethical Hacker understanding security concepts\n\nHe combines creativity with technical expertise to build innovative solutions.",
-      default: "I'm here to help! I can tell you about:\n\n• Maviya's projects and portfolio\n• Skills and technical expertise\n• Experience and education\n• Contact information\n• Career goals and interests\n\nFeel free to ask me anything!"
+      projects: "Maviya has worked on exciting projects including:\n\n• Modern portfolio and business websites\n• JavaScript automation systems\n• AI-based tools and assistant integrations\n• Security-focused concepts and implementations\n• Full-stack web applications\n\nVisit the Work section on the main page for live demos and project details.",
+      skills: "Maviya is skilled in:\n\n• Frontend Development: HTML5, CSS3, JavaScript, React\n• UI/UX Design: Modern and responsive interfaces\n• Automation: JavaScript workflow tools and scripts\n• AI & Tools: AI APIs and practical integrations\n• Version Control: Git & GitHub\n• Backend: Node.js, Express, and databases\n\nHe is constantly learning and improving through real-world projects.",
+      contact: "You can reach Maviya through:\n\n• Email: maviyaattar4@gmail.com\n• WhatsApp: +91 8485089678\n• LinkedIn: https://www.linkedin.com/in/maviya-attar-59b619293\n• GitHub: https://github.com/maviyaattar\n• Website: https://maviyaattar.dev/\n\nFeel free to connect for collaboration, freelance work, or technical discussions.",
+      experience: "Maviya Attar is a Software Engineer in Solapur and Founder of Attar Technologies Solapur.\n\n• Diploma in Computer Engineering background\n• Full Stack Developer with a modern web stack\n• Automation Engineer building efficient workflows\n• AI enthusiast focused on practical products\n• Security-aware developer with ethical hacking knowledge\n\nHe combines creativity and engineering to deliver impactful digital solutions.",
+      default: "I can help with details about Maviya Attar:\n\n• Projects and portfolio highlights\n• Skills and technical expertise\n• Experience and background\n• Contact and social links\n• Resume and profile guidance\n\nAsk your question and I’ll provide the best available information."
     };
 
     function getAIResponse(query) {
@@ -902,16 +936,31 @@ function handleInstagramAction() {
     function attachSuggestionListeners() {
       const suggestionButtons = document.querySelectorAll('.suggestion-btn');
       suggestionButtons.forEach(btn => {
+        if (btn.dataset.listenerAttached === 'true') {
+          return;
+        }
+        btn.dataset.listenerAttached = 'true';
         btn.addEventListener('click', () => {
           const prompt = btn.getAttribute('data-prompt');
+          if (!prompt) {
+            return;
+          }
           messageInput.value = prompt;
-          chatForm.dispatchEvent(new Event('submit'));
+          if (typeof chatForm.requestSubmit === 'function') {
+            chatForm.requestSubmit();
+          } else {
+            chatForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+          }
         });
       });
     }
     
     // Attach listeners on load
-    attachSuggestionListeners();
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachSuggestionListeners, { once: true });
+    } else {
+      attachSuggestionListeners();
+    }
 
     // Form submission
     chatForm.addEventListener('submit', handleSubmit);
@@ -920,7 +969,11 @@ function handleInstagramAction() {
     messageInput.addEventListener('keydown', (e) => {
       if (e.key === 'Enter' && !e.shiftKey) {
         e.preventDefault();
-        chatForm.dispatchEvent(new Event('submit'));
+        if (typeof chatForm.requestSubmit === 'function') {
+          chatForm.requestSubmit();
+        } else {
+          chatForm.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+        }
       }
     });
   </script>
