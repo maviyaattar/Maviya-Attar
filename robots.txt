@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://maviyaattar.dev/sitemap.xml
+Host: maviyaattar.dev

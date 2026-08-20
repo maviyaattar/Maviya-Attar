@@ -58,7 +58,7 @@ Visit the **Projects** section on the website for live demos and details.
 
 ## 📬 Contact
 
-- 🌐 Website: https://maviya.me  
+- 🌐 Website: https://maviyaattar.dev  
 - 💼 GitHub: https://github.com/maviyaattar  
 
 ---
